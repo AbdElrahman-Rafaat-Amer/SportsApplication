@@ -8,7 +8,7 @@
 
 import Foundation
 
-class League :Decodable
+class Country:Decodable
 {
     var idLeague: String?
     var strSport: String?
@@ -25,5 +25,5 @@ class League :Decodable
 }
 class LeaguesResponse:Decodable
 {
-    var league:[League]
+    var country:[Country]
 }

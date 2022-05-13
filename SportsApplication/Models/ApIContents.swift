@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum APIContents
+enum Constants
 
 {
     static let BASE_URL_MAIN = "https://www.thesportsdb.com/api/v1/json/1/all_sports.php"
