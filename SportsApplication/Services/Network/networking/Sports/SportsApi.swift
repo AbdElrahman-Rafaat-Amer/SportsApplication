@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+/*
 protocol SportsAPiProtocol {
     
     func getSports(complition: @escaping(Result<SportsResponse?,NSError>)->Void)
@@ -21,5 +21,5 @@ class SportsAPi:BaseApi<ALLSportsNetwork>,SportsAPiProtocol
         }
     }
     
-}
+}*/
 

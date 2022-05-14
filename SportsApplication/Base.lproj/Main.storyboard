@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -147,41 +148,55 @@
             </objects>
             <point key="canvasLocation" x="3637.68115942029" y="403.79464285714283"/>
         </scene>
-        <!--Table View Controller-->
-        <scene sceneID="bTM-6X-wnl">
+        <!--All Sports Collection View Controller-->
+        <scene sceneID="kqt-du-shq">
             <objects>
-                <tableViewController id="FAI-gk-sEz" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fnl-Pc-2Tp">
+                <collectionViewController storyboardIdentifier="AllSportsCollectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AlL-Sq-FqW" customClass="AllSportsCollectionViewController" customModule="SportsApplication" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="mbb-e9-9DN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rJr-AP-Sdu">
-                            <rect key="frame" x="0.0" y="99.5" width="414" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="pxJ-Hm-tfb">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pxJ-Hm-tfb" id="TlH-KD-Vql">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5Nv-Ll-2Tk">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="q6v-PR-TwO" customClass="SportsCollectionViewCell" customModule="SportsApplication" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2Jh-c4-69H">
+                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q3T-nH-FrH">
+                                            <rect key="frame" x="43" y="54" width="42" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="q3T-nH-FrH" firstAttribute="centerX" secondItem="2Jh-c4-69H" secondAttribute="centerX" id="EyX-xv-gbP"/>
+                                        <constraint firstItem="q3T-nH-FrH" firstAttribute="centerY" secondItem="2Jh-c4-69H" secondAttribute="centerY" id="Fim-9S-kz8"/>
+                                    </constraints>
+                                </collectionViewCellContentView>
+                                <connections>
+                                    <outlet property="sportsNameLabel" destination="q3T-nH-FrH" id="qwu-w9-11T"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
                         <connections>
-                            <outlet property="dataSource" destination="FAI-gk-sEz" id="aEo-3r-Sj3"/>
-                            <outlet property="delegate" destination="FAI-gk-sEz" id="TPi-Yc-DeH"/>
+                            <outlet property="dataSource" destination="AlL-Sq-FqW" id="SaU-OY-Q2b"/>
+                            <outlet property="delegate" destination="AlL-Sq-FqW" id="9Tp-QS-DpJ"/>
                         </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="B7T-MY-GHP"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kVG-I8-Mlq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="QKj-eQ-5hz"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pvZ-bG-3w8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1914" y="-417"/>
+            <point key="canvasLocation" x="1937.68115942029" y="-417.1875"/>
         </scene>
         <!--All Leagues Table View Controller-->
         <scene sceneID="il9-G6-QEU">
@@ -217,7 +232,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xmo-oP-u9m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2848" y="-431"/>
+            <point key="canvasLocation" x="3317" y="-431"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="WDD-89-4jU">
@@ -225,6 +240,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="DDc-jX-3UT" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="g6N-Qh-6nR">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -268,7 +284,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="FAI-gk-sEz" kind="relationship" relationship="rootViewController" id="9Ig-5W-XTy"/>
+                        <segue destination="AlL-Sq-FqW" kind="relationship" relationship="rootViewController" id="zcn-th-GMG"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9QT-Wq-h9f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
