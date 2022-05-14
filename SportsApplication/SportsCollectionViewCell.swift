@@ -10,12 +10,15 @@ import UIKit
 
 class SportsCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet private weak var sportsNameLabel: UILabel!
+   // @IBOutlet private weak var sportsNameLabel: UILabel!
+   
+    @IBOutlet weak var sportsNameLabel: UILabel!
+    @IBOutlet weak var sportsImageView: UIImageView!
     
     func configrationCellLabel(with sportName : String){
         print("sportName")
         print(sportName)
-        
+        sportsImageView.image = UIImage(named: "Image")
         sportsNameLabel.text = sportName
         print("after assign")
         print(sportsNameLabel.text ?? "defult")
