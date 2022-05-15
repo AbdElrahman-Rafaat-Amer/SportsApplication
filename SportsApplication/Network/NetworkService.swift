@@ -9,42 +9,70 @@
 import Foundation
 import Alamofire
 
-class NetworkService{
-
-   // This code will call the iTunes top 25 movies endpoint listed above
-    static func getData(){
-      let apiToContact = "https://www.thesportsdb.com/api/v1/json/2/all_sports.php"
-   Alamofire.request(apiToContact).validate().responseJSON() { response in
-       switch response.result {
-       case .success:
-           if let value = response.result.value {
-               //let json = JSON(value)
-            print(value)
-               // Do what you need to with JSON here!
-               // The rest is all boiler plate code you'll use for API requests
-
-
-           }
-       case .failure(let error):
-           print(error)
-       }
+protocol MovieService{
+    static func fetchResult(complitionHandler : @escaping (AllSports?) -> Void)
+}
+class NetworkService : MovieService{
+    
+    static func fetchResult(complitionHandler : @escaping (AllSports?) -> Void){
+        let url = URL(string: "https://www.thesportsdb.com/api/v1/json/2/all_sports.php")
+        guard let newUrl = url else{
+            return
         }
+        let request = URLRequest(url: newUrl)
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        //URLSession.shared.dataTask(with: request) { (data, response, error) in
+        //    //
+        //}
+        let task = session.dataTask(with: request) { (data, response, error) in
+            guard let data = data else{
+                return
+            }
+            do{
+                let result = try JSONDecoder().decode(AllSports.self, from: data)
+                complitionHandler(result)
+            }catch let error{
+                print("Here")
+                print(error.localizedDescription)
+                complitionHandler(nil)
+            }
+            
+            
+        }
+        task.resume()
         
     }
     
-    static func loadJsonData()
-    {
-    
-       Alamofire.request("https://www.thesportsdb.com/api/v1/json/2/all_sports.php").responseJSON { (response) in
-            print("Response value \(response)")
-          
-            print("Response.result.value \(response.result.value!)")
-          
-        if let json = response.result.value as! [String:Any]?{
-            if let responseValue = json["results"] as! [[String:Any]]?{
-              print(responseValue)
+    static func request<T: Decodable>(fromEndpoint: EndPoint, httpMethod: HTTPMethod = .get,parametrs : [String:String] , complitionHandler: @escaping (Swift.Result<T, Error>) -> Void) {
+        
+        let baseURL = "https://www.thesportsdb.com/api/v1/json/2/"
+        
+        guard let url = URL(string: "\(baseURL)\(fromEndpoint.rawValue)") else {
+            print("Error in URL")
+            return
+        }
+        let request = URLRequest(url: url)
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+       
+        let task = session.dataTask(with: request) { (data, response, error) in
+            guard let data = data else{
+                return
             }
+            do{
+                let result = try JSONDecoder().decode(T.self, from: data)
+                print("res------> \(result)")
+                //sports[0].strSport ?? "strSport")")
+                complitionHandler(.success(response as! T))
+            }catch let error{
+                print("Here")
+                print(error.localizedDescription)
+                complitionHandler(.failure(error))
+            }
+            
+            
         }
-        }
+        task.resume()
+        
     }
 }
+

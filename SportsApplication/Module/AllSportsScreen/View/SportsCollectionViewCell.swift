@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SportsCollectionViewCell: UICollectionViewCell {
     
@@ -16,11 +17,10 @@ class SportsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var sportsImageView: UIImageView!
     
     func configrationCellLabel(with sportName : String){
-        print("sportName")
-        print(sportName)
-        sportsImageView.image = UIImage(named: "Image")
         sportsNameLabel.text = sportName
-        print("after assign")
-        print(sportsNameLabel.text ?? "defult")
+    }
+    
+    func congigrationCellImage(with sportImageURL : String){
+        sportsImageView.kf.setImage(with: URL(string: sportImageURL))
     }
 }

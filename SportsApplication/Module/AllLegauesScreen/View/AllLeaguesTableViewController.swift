@@ -10,14 +10,12 @@ import UIKit
 
 class AllLeaguesTableViewController: UITableViewController {
 
+    var sportName : String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+   //     print("SportName----> \(sportName)")
+   //     title = sportName
     }
 
     // MARK: - Table view data source
