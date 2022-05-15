@@ -8,8 +8,8 @@
 
 import Foundation
 
-class SportsAPIResponse: Decodable {
+class AllSports: Decodable {
     
-    var sports:[Sports]
+    var sports:[Sport]
 }
 

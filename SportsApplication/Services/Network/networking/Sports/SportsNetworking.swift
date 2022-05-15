@@ -8,7 +8,7 @@
 
 import Foundation
 import Alamofire
-
+/*
 enum ALLSportsNetwork
 {
     case getSports
@@ -77,3 +77,4 @@ extension AllLeaguesNetwork:RequestType
        }
 }
 
+*/

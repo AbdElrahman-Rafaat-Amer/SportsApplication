@@ -15,6 +15,9 @@ class AllSportsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     title = "All Sports"
+        
+        NetworkService.loadJsonData()
+        
     }
 
 
@@ -48,5 +51,33 @@ class AllSportsCollectionViewController: UICollectionViewController {
         return 1
     }
     
+}
+
+extension AllSportsCollectionViewController : NetworkConnectionStatusListener{
+    func networkStatusDidChange(status: NetworkConnectionStatus) {
+        print("---------------------------------------------------------")
+        switch status{
+        case .offline:
+            //showAlertWith(message : "Offline")
+            print("offline-----------------------------------")
+
+        case .online:
+         //    showAlertWith(message : "online")
+            print("online-------------------------------------")
+        }
+    }
+}
+
+extension AllSportsCollectionViewController{
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ConnectivityMananger.shared().addListener(listener: self)
+        print("dfdfdfdf")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        ConnectivityMananger.shared().removeListener(listener: self)
+    }
 }
 

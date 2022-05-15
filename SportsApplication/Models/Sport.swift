@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class Sports:Decodable
+class Sport:Decodable
 {
     var idSport : String?
     var strSport : String?

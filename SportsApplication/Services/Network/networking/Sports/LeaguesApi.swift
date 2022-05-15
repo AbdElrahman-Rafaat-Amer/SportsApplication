@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+/*
 protocol LeaguesAPiProtocol {
     func getLeagues(sportsName:String,complition: @escaping(Result<LeaguesResponse?,NSError>)->Void)
 }
@@ -21,5 +21,5 @@ class LeaguesAPi:BaseApi<AllLeaguesNetwork>,LeaguesAPiProtocol
             complition(result)
         }
     }
-}
+}*/
 
