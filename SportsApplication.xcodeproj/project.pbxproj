@@ -256,7 +256,6 @@
 				C90EC17C282C3BF500A91DCE /* Assets.xcassets */,
 				C90EC17E282C3BF500A91DCE /* LaunchScreen.storyboard */,
 				C90EC181282C3BF500A91DCE /* Info.plist */,
-				C90EC179282C3BF100A91DCE /* SportsApplication.xcdatamodeld */,
 				30E774E8282DA8EF00B5F9F4 /* AllFavoriteTableViewController.swift */,
 				30E774EC282DA9AF00B5F9F4 /* LeaguesDeatilsViewController.swift */,
 				30E774EE282DA9D200B5F9F4 /* TeamDetailsViewController.swift */,
@@ -282,6 +281,7 @@
 		C93FEC30282E66B3007484F8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				C9ED685C2831AF70008B182B /* CoreData */,
 				3046FC88282DC54F0055899D /* Network */,
 			);
 			path = Services;
@@ -330,6 +330,14 @@
 				C93FEC42282E6C4E007484F8 /* LeaguesDetailsNetworking.swift */,
 			);
 			path = LeaguesDetailsNetwork;
+			sourceTree = "<group>";
+		};
+		C9ED685C2831AF70008B182B /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				C90EC179282C3BF100A91DCE /* SportsApplication.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
