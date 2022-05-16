@@ -13,3 +13,8 @@ class Sport:Decodable
     var strSportThumb : String?
     var strSportIconGreen : String?
 }
+
+class AllSports: Decodable {
+    
+    var sports:[Sport]
+}

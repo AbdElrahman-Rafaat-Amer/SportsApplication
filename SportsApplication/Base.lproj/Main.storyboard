@@ -689,7 +689,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="LeagueViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LeagueViewCell" rowHeight="100" id="Qim-Hu-Dif" customClass="LeagueViewCell" customModule="SportsApplication" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LeagueViewCell" rowHeight="100" id="Qim-Hu-Dif" customClass="LeagueTableViewCell" customModule="SportsApplication" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Qim-Hu-Dif" id="nO5-3y-had">
@@ -702,21 +702,21 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hmi-2E-5Z2">
                                                     <rect key="frame" x="8" y="8" width="114.5" height="84"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="V8 Supercars" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2I-GP-kTL">
-                                                    <rect key="frame" x="126.5" y="16" width="191.5" height="19.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="leagues title" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2I-GP-kTL">
+                                                    <rect key="frame" x="132.5" y="16" width="185.5" height="68"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p2N-pD-Tln">
-                                                    <rect key="frame" x="318" y="44" width="56" height="48"/>
+                                                    <rect key="frame" x="318" y="8" width="56" height="84"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="ba4-xr-RBw"/>
                                                         <constraint firstAttribute="width" constant="56" id="i2B-U4-xn8"/>
                                                     </constraints>
                                                     <state key="normal" image="youtube"/>
                                                     <connections>
-                                                        <action selector="youTube:" destination="Qim-Hu-Dif" eventType="touchUpInside" id="ArW-C0-yJk"/>
+                                                        <action selector="leagueYoutubeButton:" destination="Qim-Hu-Dif" eventType="touchUpInside" id="WOo-cs-gCc"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -724,13 +724,16 @@
                                             <constraints>
                                                 <constraint firstItem="W2I-GP-kTL" firstAttribute="leading" secondItem="hmi-2E-5Z2" secondAttribute="trailing" constant="4" id="4pt-fA-xoN"/>
                                                 <constraint firstItem="hmi-2E-5Z2" firstAttribute="leading" secondItem="4wT-Ap-9sz" secondAttribute="leading" constant="8" id="6hr-0G-Gra"/>
+                                                <constraint firstItem="W2I-GP-kTL" firstAttribute="leading" secondItem="hmi-2E-5Z2" secondAttribute="trailing" constant="10" id="KdF-sZ-LZB"/>
                                                 <constraint firstAttribute="trailing" secondItem="W2I-GP-kTL" secondAttribute="trailing" constant="64" id="OrN-Fw-hz7"/>
+                                                <constraint firstItem="W2I-GP-kTL" firstAttribute="centerY" secondItem="4wT-Ap-9sz" secondAttribute="centerY" id="QCV-0i-eHS"/>
                                                 <constraint firstAttribute="trailing" secondItem="p2N-pD-Tln" secondAttribute="trailing" constant="8" id="UZN-A1-sZ7"/>
                                                 <constraint firstItem="hmi-2E-5Z2" firstAttribute="top" secondItem="4wT-Ap-9sz" secondAttribute="top" constant="8" id="abO-hm-eLS"/>
                                                 <constraint firstItem="hmi-2E-5Z2" firstAttribute="width" secondItem="4wT-Ap-9sz" secondAttribute="width" multiplier="0.3" id="e2s-KU-Scb"/>
                                                 <constraint firstAttribute="bottom" secondItem="hmi-2E-5Z2" secondAttribute="bottom" constant="8" id="hFl-y7-10d"/>
                                                 <constraint firstAttribute="bottom" secondItem="p2N-pD-Tln" secondAttribute="bottom" constant="8" id="m9J-yv-fD4"/>
                                                 <constraint firstItem="W2I-GP-kTL" firstAttribute="top" secondItem="4wT-Ap-9sz" secondAttribute="top" constant="16" id="nyi-ac-Xu4"/>
+                                                <constraint firstItem="p2N-pD-Tln" firstAttribute="centerY" secondItem="4wT-Ap-9sz" secondAttribute="centerY" id="tyY-su-KYQ"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -744,9 +747,8 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <outlet property="ViewInCell" destination="4wT-Ap-9sz" id="F8U-hq-1hE"/>
-                                    <outlet property="leaguesImg" destination="hmi-2E-5Z2" id="3Qz-gf-nru"/>
-                                    <outlet property="leaguesTitle" destination="W2I-GP-kTL" id="fA6-dC-sDh"/>
+                                    <outlet property="leagueImageView" destination="hmi-2E-5Z2" id="sJv-ff-fo9"/>
+                                    <outlet property="leagueTitleTextView" destination="W2I-GP-kTL" id="9XM-5g-uy8"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -755,9 +757,6 @@
                             <outlet property="delegate" destination="GRb-w6-IdH" id="Cfa-JF-ViE"/>
                         </connections>
                     </tableView>
-                    <connections>
-                        <outlet property="myTable" destination="85f-5X-44P" id="CZ1-5B-U2k"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GZG-2o-iAp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

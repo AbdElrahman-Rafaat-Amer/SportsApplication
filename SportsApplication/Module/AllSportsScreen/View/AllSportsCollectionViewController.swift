@@ -55,12 +55,12 @@ class AllSportsCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Selected Sport \(sports[indexPath.row].strSport ?? "strSport")")
-      /*  let AllLegauesScreen = self.storyboard?.instantiateViewController(identifier: "allLeagues")
+        let AllLegauesScreen = self.storyboard?.instantiateViewController(identifier: "allLeagues")
             as! AllLeaguesTableViewController
         
-        AllLegauesScreen.sportName =  sports[indexPath.row].strSport  //sports[indexPath.row]
+        AllLegauesScreen.sportName =  sports[indexPath.row].strSport  
         AllLegauesScreen.modalPresentationStyle = .fullScreen
-        self.present(AllLegauesScreen, animated: true, completion: nil)*/
+        self.present(AllLegauesScreen, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

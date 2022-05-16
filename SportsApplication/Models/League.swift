@@ -8,22 +8,14 @@
 
 import Foundation
 
-class Country:Decodable
+class League:Decodable
 {
-    var idLeague: String?
-    var strSport: String?
     var strYoutube:String?
     var strBadge:String?
-    var strLeague:String
-    init() {
-        idLeague = ""
-        strSport = ""
-        strYoutube = ""
-        strBadge = ""
-        strLeague = ""
-    }
+    var strLeague:String?
 }
-class LeaguesResponse:Decodable
+
+class AllLeagues:Decodable
 {
-    var country:[Country]
+    var countries :[League]
 }

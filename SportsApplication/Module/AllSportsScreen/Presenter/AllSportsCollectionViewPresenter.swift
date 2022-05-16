@@ -19,7 +19,7 @@ class AllSportsCollectionViewPresenter {
     
     
     func getDataFromAPI(){
-        NetworkService.fetchResult{[weak self] (res) in
+        NetworkService.getAllSports{[weak self] (res) in
             for i in 0...(res?.sports.count)!-1{
                 print(res?.sports[i].strSport ?? "strSport")
                 print(res?.sports[i].strSportThumb ?? "sportThumb")
