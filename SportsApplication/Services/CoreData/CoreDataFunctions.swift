@@ -49,8 +49,7 @@ class CoreData
           }
     }
     
-    // retrieving the data which inserted from the cordataEntity
-    
+   // retrieving the data which inserted from the cordataEntity
     
     func retrieveFavouriteLeagues() -> [String:[FavouritesLeaguesEntity]]
     {
@@ -76,6 +75,7 @@ class CoreData
         }
         return favouriteLeagues
     }
+    
     
     
     
