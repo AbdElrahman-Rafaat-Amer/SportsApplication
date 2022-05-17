@@ -10,88 +10,102 @@ import UIKit
 
 class AllFavoriteTableViewController: UITableViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print("in AllFavoriteTableViewController")
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
+   
+   let indicator = UIActivityIndicatorView(style: .large)
+   
+     var presenter : FavouriteLeaguesPresenter!
+   
+     var sportName : String?
+   
+     var leagues : [League] = []
     
-    override func viewDidAppear(_ animated: Bool) {
-        print("viewDidAppear")
-        showToastView(messsage: "appear favorite", view: self.view)
-    }
-    
-    // MARK: - Table view data source
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
-    
-    /*
-     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-     
-     // Configure the cell...
-     
-     return cell
-     }
-     */
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
-}
+    var result:[String:[FavouritesLeaguesEntity]] = [:]
+   
 
+   override func viewDidLoad() {
+       super.viewDidLoad()
+       
+           navigationItem.title = sportName
+           indicator.center = self.view.center
+           self.view.addSubview(indicator)
+           indicator.startAnimating()
+           
+           presenter = FavouriteLeaguesPresenter()
+       
+           presenter.attachView(viewController: self)
+       
+           presenter.setSport(sportName: sportName!)
+           presenter.getLeaguesFromCoreData()
+           
+       }
+   
+   
+  
+   
+   // MARK: - Table view data source
+   
+    override func numberOfSections(in tableView: UITableView) -> Int {
+          return presenter.getFavLeaguesSectionCount()
+      }
+
+      override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+          return presenter.getFavLeaguesRowCount(index: section)
+      }
+      
+      override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+          
+          var cell =  UITableViewCell()
+          
+          if var leagueCell = tableView.dequeueReusableCell(withIdentifier: "favouriteSport", for: indexPath) as? FavouriteTableViewCell {
+              
+           
+             /* leagueCell.configrationCellLeagueLabel(with: leagues[indexPath.row].strLeague ?? "strLeague")
+              
+              leagueCell.congigrationCellLeagueImage(with: leagues[indexPath.row].strBadge ?? "strBadge" )
+              
+              leagueCell.congigrationCellLeagueYoutube(with: leagues[indexPath.row].strYoutube ?? "strYoutube" )
+             */
+            presenter.configure(cell: &leagueCell, forSection: indexPath.section, forIndex: indexPath.row)
+            
+              cell = leagueCell
+              
+          }
+          
+          return cell
+      }
+      
+      override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+              print("select leage \(leagues[indexPath.row].idLeague ?? "idLeague")")
+              
+              let LeaguesDetailsScreen = self.storyboard?.instantiateViewController(identifier: "leagueDetails")
+                  as! LeagueInformationViewController
+              
+              LeaguesDetailsScreen.leagueName = leagues[indexPath.row].strLeague
+              LeaguesDetailsScreen.modalPresentationStyle = .fullScreen
+              self.present(LeaguesDetailsScreen, animated: true, completion: nil)
+          }
+          
+          
+      }
+
+      extension AllFavoriteTableViewController : ResultAPIProtocl{
+          func stopAnimating() {
+              self.indicator.stopAnimating()
+          }
+          
+          func renderTableView() {
+           
+              
+              if(presenter.leagues == nil){
+                  print("favleagues null in All table view controller")
+              }else{
+                  leagues = presenter.leagues.map({ (item) -> League in
+    
+                    return item
+                  })
+                  self.tableView.reloadData()
+              }
+          }
+          
+          
+    }

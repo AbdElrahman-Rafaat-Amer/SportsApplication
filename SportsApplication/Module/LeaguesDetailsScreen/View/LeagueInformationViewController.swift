@@ -7,8 +7,11 @@
 //
 
 import UIKit
-
+//import CoreData
 class LeagueInformationViewController: UIViewController {
+    
+  //  let coreData: CoreData = CoreData()
+  //  var league : League = League()
     
     private var isFavorite: Bool = false
     var leagueName : String?
@@ -27,11 +30,17 @@ class LeagueInformationViewController: UIViewController {
         
         if(isFavorite){
             sender.isSelected = isFavorite
+            
+         //   coreData.insertfavouriteLeague(league :league)
             print("add to favroite")
             showToastView(messsage: "add to favroite", view: self.view)
         }else{
             sender.isSelected = isFavorite
+            
+         //  coreData.deleteFromFavouriteLeagues(league: league)
+            
             print("remove from favroite")
+            
             showToastView(messsage: "remove from favroite", view: self.view)
         }
         

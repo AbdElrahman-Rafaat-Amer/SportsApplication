@@ -7,9 +7,12 @@
 //
 
 import Foundation
+//import CoreData
 class AllTeamsViewPresenter {
     var teams : [Team]!
     private var leagueName : String!
+    
+
     
     weak var teamsViewController : ResultAPIProtocl!
     

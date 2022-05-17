@@ -46,7 +46,7 @@ class AllLeaguesTableViewController: UITableViewController {
         
         var cell =  UITableViewCell()
         
-        if let leagueCell = tableView.dequeueReusableCell(withIdentifier: "LeagueViewCell", for: indexPath) as? LeagueTableViewCell {
+        if let leagueCell = tableView.dequeueReusableCell(withIdentifier:  "LeagueViewCell", for: indexPath) as? LeagueTableViewCell {
             
             //   leagueCell.layer.cornerRadius = leagueCell.bounds.height / 2
             // leagueCell.clipsToBounds = true
