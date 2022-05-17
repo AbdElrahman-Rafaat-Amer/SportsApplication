@@ -49,5 +49,36 @@ class CoreData
           }
     }
     
+    // retrieving the data which inserted from the cordataEntity
+    
+    
+    func retrieveFavouriteLeagues() -> [String:[FavouritesLeaguesEntity]]
+    {
+        var favouriteLeagues:[String:[FavouritesLeaguesEntity]] = [:]
+        var leagues:[FavouritesLeaguesEntity] = []
+        
+        let fetchReq = NSFetchRequest<NSManagedObject>(entityName: "FavouritesLeaguesEntity")
+        do{
+            leagues = try manageContext?.fetch(fetchReq) as! [FavouritesLeaguesEntity]
+            
+            for i in leagues
+            {
+                if(favouriteLeagues[i.strSport!] == nil)
+                {
+                    favouriteLeagues[i.strSport!] = []
+                }
+                
+                favouriteLeagues[i.strSport!]?.append(i)
+            }
+            
+        }catch let error as NSError{
+            print(error)
+        }
+        return favouriteLeagues
+    }
+    
+    
+    
+    
     
 }
