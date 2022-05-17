@@ -10,7 +10,7 @@ import Foundation
 class AllLeaguesViewPresenter {
     
     var leagues : [League]!
-    private var sport : String!
+    private var sportName : String!
     
     weak var viewController : ResultAPIProtocl!
     
@@ -19,23 +19,39 @@ class AllLeaguesViewPresenter {
     }
     
     func setSport(sportName: String){
-        self.sport = sportName
+        self.sportName = sportName
     }
     
-    func getDataFromAPI(){
-        NetworkService.getAllLeagues(sportName : sport){[weak self] (result) in
-            for i in 0...(result?.countries.count)!-1{
-                print(result?.countries[i].strBadge ?? "strBadge")
-                print(result?.countries[i].strLeague ?? "strLeague")
-                print(result?.countries[i].strYoutube ?? "strYoutube")
-                
+    func getLeaguesFromAPI(){
+        /*  NetworkService.getAllLeagues(sportName : sportName){[weak self] (result) in
+         for i in 0...(result?.countries.count)!-1{
+         print(result?.countries[i].strBadge ?? "strBadge")
+         print(result?.countries[i].strLeague ?? "strLeague")
+         print(result?.countries[i].strYoutube ?? "strYoutube")
+         
+         }
+         self?.leagues = result?.countries
+         DispatchQueue.main.async {
+         self?.viewController.renderTableView()
+         self?.viewController.stopAnimating()
+         }
+         
+         }*/
+        
+        NetworkService.loadDataFromAPi(parameterName : sportName, endPoint: EndPoints.allLeagues.rawValue){[weak self] (result: AllLeagues?) in
+            print("number of leagues ---> \(result?.countries.count ?? -1)")
+            if((result?.countries.isEmpty) == nil){
+                print("no leagues exist")
+            }else{
+                for i in 0...(result?.countries.count)!-1{
+                    print(result?.countries[i].strLeague ?? "strLeague")
+                }
             }
             self?.leagues = result?.countries
             DispatchQueue.main.async {
                 self?.viewController.renderTableView()
                 self?.viewController.stopAnimating()
             }
-            
         }
     }
 }

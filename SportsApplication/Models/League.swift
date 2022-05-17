@@ -10,9 +10,11 @@ import Foundation
 
 class League:Decodable
 {
-    var strYoutube:String?
-    var strBadge:String?
-    var strLeague:String?
+    var idLeague    : String?
+    var strSport    : String?
+    var strYoutube  :String?
+    var strBadge    :String?
+    var strLeague   :String?
 }
 
 class AllLeagues:Decodable

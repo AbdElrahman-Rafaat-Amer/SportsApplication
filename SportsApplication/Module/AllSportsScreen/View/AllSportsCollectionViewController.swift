@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol HomeProtocol : AnyObject{
-    func stopAnimating()
-    func renderTableView()
-}
 
 class AllSportsCollectionViewController: UICollectionViewController {
     
@@ -23,6 +19,7 @@ class AllSportsCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         title = "All Sports"
         
+        
         indicator.center = self.view.center
         self.view.addSubview(indicator)
         indicator.startAnimating()
@@ -30,7 +27,7 @@ class AllSportsCollectionViewController: UICollectionViewController {
         presenter = AllSportsCollectionViewPresenter()
         presenter.attachView(viewController: self)
         
-        presenter.getDataFromAPI()
+        presenter.getAllSportsFromAPI()
     }
     
     
@@ -58,16 +55,16 @@ class AllSportsCollectionViewController: UICollectionViewController {
         let AllLegauesScreen = self.storyboard?.instantiateViewController(identifier: "allLeagues")
             as! AllLeaguesTableViewController
         
-        AllLegauesScreen.sportName =  sports[indexPath.row].strSport  
+        AllLegauesScreen.sportName =  sports[indexPath.row].strSport
         AllLegauesScreen.modalPresentationStyle = .fullScreen
-        self.present(AllLegauesScreen, animated: true, completion: nil)
+        self.navigationController?.pushViewController(AllLegauesScreen, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let widthSize = (collectionView.frame.size.width - 48) / 2
         return CGSize(width: widthSize, height:180)
     }
-        
+    
 }
 
 extension AllSportsCollectionViewController : NetworkConnectionStatusListener{
@@ -95,21 +92,26 @@ extension AllSportsCollectionViewController{
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         ConnectivityMananger.shared().removeListener(listener: self)
-         print("viewWillDisappear")
+        print("viewWillDisappear")
     }
 }
 
-extension AllSportsCollectionViewController : HomeProtocol{
+extension AllSportsCollectionViewController : ResultAPIProtocl{
     
     func stopAnimating() {
         self.indicator.stopAnimating()
     }
     
     func renderTableView() {
-        sports = presenter.sports.map({ (item) -> Sport in
-            return item
-        })
-        self.collectionView.reloadData()
+        
+        if(presenter.sports == nil){
+            print("sports null in All leagues collection view controller")
+        }else{
+            sports = presenter.sports.map({ (item) -> Sport in
+                return item
+            })
+            self.collectionView.reloadData()
+        }
     }
     
 }

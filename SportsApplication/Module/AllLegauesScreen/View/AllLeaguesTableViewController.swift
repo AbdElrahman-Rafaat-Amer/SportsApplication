@@ -20,7 +20,7 @@ class AllLeaguesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("SportName----> \(sportName ?? "sportName")")
-        
+        navigationItem.title = sportName
         indicator.center = self.view.center
         self.view.addSubview(indicator)
         indicator.startAnimating()
@@ -28,7 +28,7 @@ class AllLeaguesTableViewController: UITableViewController {
         presenter = AllLeaguesViewPresenter()
         presenter.attachView(viewController: self)
         presenter.setSport(sportName: sportName!)
-        presenter.getDataFromAPI()
+        presenter.getLeaguesFromAPI()
         
     }
     
@@ -48,6 +48,8 @@ class AllLeaguesTableViewController: UITableViewController {
         
         if let leagueCell = tableView.dequeueReusableCell(withIdentifier: "LeagueViewCell", for: indexPath) as? LeagueTableViewCell {
             
+            //   leagueCell.layer.cornerRadius = leagueCell.bounds.height / 2
+            // leagueCell.clipsToBounds = true
             leagueCell.configrationCellLeagueLabel(with: leagues[indexPath.row].strLeague ?? "strLeague")
             
             leagueCell.congigrationCellLeagueImage(with: leagues[indexPath.row].strBadge ?? "strBadge" )
@@ -55,14 +57,24 @@ class AllLeaguesTableViewController: UITableViewController {
             leagueCell.congigrationCellLeagueYoutube(with: leagues[indexPath.row].strYoutube ?? "strYoutube" )
             
             cell = leagueCell
+            
         }
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        <#code#>
+        print("select leage \(leagues[indexPath.row].idLeague ?? "idLeague")")
+        
+        let LeaguesDetailsScreen = self.storyboard?.instantiateViewController(identifier: "leagueDetails")
+            as! LeagueInformationViewController
+        
+        LeaguesDetailsScreen.leagueName = leagues[indexPath.row].strLeague
+        LeaguesDetailsScreen.modalPresentationStyle = .fullScreen
+        self.present(LeaguesDetailsScreen, animated: true, completion: nil)
     }
+    
+    
 }
 
 extension AllLeaguesTableViewController : ResultAPIProtocl{
@@ -71,10 +83,15 @@ extension AllLeaguesTableViewController : ResultAPIProtocl{
     }
     
     func renderTableView() {
-        leagues = presenter.leagues.map({ (item) -> League in
-            return item
-        })
-        self.tableView.reloadData()
+        
+        if(presenter.leagues == nil){
+            print("leagues null in All leagues table view controller")
+        }else{
+            leagues = presenter.leagues.map({ (item) -> League in
+                return item
+            })
+            self.tableView.reloadData()
+        }
     }
     
     

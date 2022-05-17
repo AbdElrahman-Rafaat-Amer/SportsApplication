@@ -31,6 +31,10 @@ class LeagueTableViewCell: UITableViewCell {
         }
     }
     
+    override func layoutSubviews() {
+        leagueImageView.layer.cornerRadius = leagueImageView.bounds.height / 2
+        leagueImageView.clipsToBounds = true
+    }
     
     func configrationCellLeagueLabel(with sportName : String){
         leagueTitleTextView.text = sportName
@@ -38,6 +42,7 @@ class LeagueTableViewCell: UITableViewCell {
     
     func congigrationCellLeagueImage(with sportImageURL : String){
         leagueImageView.kf.setImage(with: URL(string: sportImageURL))
+       
     }
     
     func congigrationCellLeagueYoutube(with sportYoutubeURL : String){

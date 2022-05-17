@@ -139,10 +139,10 @@
             </objects>
             <point key="canvasLocation" x="979.71014492753636" y="-417.1875"/>
         </scene>
-        <!--Leagues Deatils View Controller-->
+        <!--League Information View Controller-->
         <scene sceneID="Gfk-v0-qmD">
             <objects>
-                <viewController storyboardIdentifier="LeagueDetailsVC" modalPresentationStyle="fullScreen" id="Mfv-Ws-CHq" customClass="LeaguesDeatilsViewController" customModule="SportsApplication" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="leagueDetails" modalPresentationStyle="fullScreen" id="Mfv-Ws-CHq" customClass="LeagueInformationViewController" customModule="SportsApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rjT-fB-rPg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -150,18 +150,18 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GbJ-8a-X7Q">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="99.5"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJI-V4-opF">
-                                        <rect key="frame" x="8" y="40" width="82" height="20"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJI-V4-opF" userLabel="back button">
+                                        <rect key="frame" x="8" y="40" width="56" height="20"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                        <state key="normal" title="Leagues" image="back_button">
+                                        <state key="normal" title="Back" image="back_button">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
                                         <connections>
-                                            <action selector="backButton:" destination="Mfv-Ws-CHq" eventType="touchUpInside" id="i0M-wx-0Ag"/>
+                                            <action selector="backButton:" destination="Mfv-Ws-CHq" eventType="touchUpInside" id="HGa-Jq-HKI"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t7R-El-dkj">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t7R-El-dkj" userLabel="Add To Favourite">
                                         <rect key="frame" x="384" y="34" width="22" height="32"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                         <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -169,11 +169,15 @@
                                             <color key="titleColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="titleShadowColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <state key="selected" image="star.fill" catalog="system">
+                                            <color key="titleColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
-                                            <action selector="addLeagueToFavourite:" destination="Mfv-Ws-CHq" eventType="touchUpInside" id="99f-rF-OmY"/>
+                                            <action selector="addToFavoriteButton:" destination="Mfv-Ws-CHq" eventType="touchUpInside" id="bVt-eG-kzx"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="League Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdn-BV-Tn9">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="League Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdn-BV-Tn9" userLabel="League Name">
                                         <rect key="frame" x="136" y="37.5" width="142" height="25"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -428,10 +432,7 @@
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="addLeagueToFavourite" destination="t7R-El-dkj" id="yi6-BZ-EZR"/>
-                        <outlet property="eventsCollectionView" destination="8PX-j7-bVH" id="SIz-55-CEm"/>
-                        <outlet property="latestResultsCollectionView" destination="q4h-53-x9k" id="DT2-FX-Jm1"/>
-                        <outlet property="teamsCollectionView" destination="b8G-Sl-HYB" id="XW6-vm-IJf"/>
+                        <outlet property="leagueNameTextView" destination="Qdn-BV-Tn9" id="Z0s-wO-zn0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dAJ-Pw-7iD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -684,7 +685,7 @@
         <scene sceneID="nTy-lG-s7x">
             <objects>
                 <tableViewController storyboardIdentifier="allLeagues" modalPresentationStyle="fullScreen" id="GRb-w6-IdH" customClass="AllLeaguesTableViewController" customModule="SportsApplication" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="85f-5X-44P">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="85f-5X-44P">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -697,51 +698,48 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4wT-Ap-9sz">
-                                            <rect key="frame" x="16" y="0.0" width="382" height="100"/>
+                                            <rect key="frame" x="10" y="5" width="394" height="90"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hmi-2E-5Z2">
-                                                    <rect key="frame" x="8" y="8" width="114.5" height="84"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="leagues title" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2I-GP-kTL">
-                                                    <rect key="frame" x="132.5" y="16" width="185.5" height="68"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p2N-pD-Tln">
-                                                    <rect key="frame" x="318" y="8" width="56" height="84"/>
+                                                    <rect key="frame" x="10" y="10" width="80" height="70"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="48" id="ba4-xr-RBw"/>
-                                                        <constraint firstAttribute="width" constant="56" id="i2B-U4-xn8"/>
+                                                        <constraint firstAttribute="width" constant="80" id="IgV-AO-14A"/>
+                                                        <constraint firstAttribute="height" constant="80" id="M8h-mW-BkY"/>
                                                     </constraints>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p2N-pD-Tln">
+                                                    <rect key="frame" x="330" y="13" width="64" height="64"/>
                                                     <state key="normal" image="youtube"/>
                                                     <connections>
                                                         <action selector="leagueYoutubeButton:" destination="Qim-Hu-Dif" eventType="touchUpInside" id="WOo-cs-gCc"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="leagues title" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2I-GP-kTL">
+                                                    <rect key="frame" x="151" y="35.5" width="92.5" height="19.5"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="backgroundColor" systemColor="systemGray4Color" red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstItem="W2I-GP-kTL" firstAttribute="leading" secondItem="hmi-2E-5Z2" secondAttribute="trailing" constant="4" id="4pt-fA-xoN"/>
-                                                <constraint firstItem="hmi-2E-5Z2" firstAttribute="leading" secondItem="4wT-Ap-9sz" secondAttribute="leading" constant="8" id="6hr-0G-Gra"/>
-                                                <constraint firstItem="W2I-GP-kTL" firstAttribute="leading" secondItem="hmi-2E-5Z2" secondAttribute="trailing" constant="10" id="KdF-sZ-LZB"/>
-                                                <constraint firstAttribute="trailing" secondItem="W2I-GP-kTL" secondAttribute="trailing" constant="64" id="OrN-Fw-hz7"/>
-                                                <constraint firstItem="W2I-GP-kTL" firstAttribute="centerY" secondItem="4wT-Ap-9sz" secondAttribute="centerY" id="QCV-0i-eHS"/>
-                                                <constraint firstAttribute="trailing" secondItem="p2N-pD-Tln" secondAttribute="trailing" constant="8" id="UZN-A1-sZ7"/>
-                                                <constraint firstItem="hmi-2E-5Z2" firstAttribute="top" secondItem="4wT-Ap-9sz" secondAttribute="top" constant="8" id="abO-hm-eLS"/>
-                                                <constraint firstItem="hmi-2E-5Z2" firstAttribute="width" secondItem="4wT-Ap-9sz" secondAttribute="width" multiplier="0.3" id="e2s-KU-Scb"/>
-                                                <constraint firstAttribute="bottom" secondItem="hmi-2E-5Z2" secondAttribute="bottom" constant="8" id="hFl-y7-10d"/>
-                                                <constraint firstAttribute="bottom" secondItem="p2N-pD-Tln" secondAttribute="bottom" constant="8" id="m9J-yv-fD4"/>
-                                                <constraint firstItem="W2I-GP-kTL" firstAttribute="top" secondItem="4wT-Ap-9sz" secondAttribute="top" constant="16" id="nyi-ac-Xu4"/>
-                                                <constraint firstItem="p2N-pD-Tln" firstAttribute="centerY" secondItem="4wT-Ap-9sz" secondAttribute="centerY" id="tyY-su-KYQ"/>
+                                                <constraint firstItem="hmi-2E-5Z2" firstAttribute="top" secondItem="4wT-Ap-9sz" secondAttribute="top" constant="10" id="76w-0M-4Tc"/>
+                                                <constraint firstItem="hmi-2E-5Z2" firstAttribute="leading" secondItem="4wT-Ap-9sz" secondAttribute="leading" constant="10" id="AVS-MK-hgW"/>
+                                                <constraint firstAttribute="bottom" secondItem="hmi-2E-5Z2" secondAttribute="bottom" constant="10" id="KOf-MJ-Kab"/>
+                                                <constraint firstItem="W2I-GP-kTL" firstAttribute="centerY" secondItem="4wT-Ap-9sz" secondAttribute="centerY" id="Wcx-dS-7Bu"/>
+                                                <constraint firstItem="W2I-GP-kTL" firstAttribute="centerX" secondItem="4wT-Ap-9sz" secondAttribute="centerX" id="fzb-Wc-pKT"/>
+                                                <constraint firstItem="p2N-pD-Tln" firstAttribute="centerY" secondItem="4wT-Ap-9sz" secondAttribute="centerY" id="kQ7-Ph-VMg"/>
+                                                <constraint firstAttribute="trailing" secondItem="p2N-pD-Tln" secondAttribute="trailing" id="oR0-8c-gTb"/>
+                                                <constraint firstItem="hmi-2E-5Z2" firstAttribute="centerY" secondItem="4wT-Ap-9sz" secondAttribute="centerY" id="x7N-Gz-bak"/>
                                             </constraints>
                                         </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="4wT-Ap-9sz" firstAttribute="leading" secondItem="nO5-3y-had" secondAttribute="leading" constant="16" id="3FX-Un-eb7"/>
-                                        <constraint firstAttribute="bottom" secondItem="4wT-Ap-9sz" secondAttribute="bottom" id="YwT-fb-Tbm"/>
-                                        <constraint firstItem="4wT-Ap-9sz" firstAttribute="top" secondItem="nO5-3y-had" secondAttribute="top" id="hYa-P6-vY0"/>
-                                        <constraint firstAttribute="trailing" secondItem="4wT-Ap-9sz" secondAttribute="trailing" constant="16" id="sqM-kc-HPZ"/>
+                                        <constraint firstItem="4wT-Ap-9sz" firstAttribute="top" secondItem="nO5-3y-had" secondAttribute="top" constant="5" id="Nio-ZN-PMe"/>
+                                        <constraint firstItem="4wT-Ap-9sz" firstAttribute="leading" secondItem="nO5-3y-had" secondAttribute="leading" constant="10" id="OcS-Tm-Mit"/>
+                                        <constraint firstAttribute="trailing" secondItem="4wT-Ap-9sz" secondAttribute="trailing" constant="10" id="Ur9-MU-XPn"/>
+                                        <constraint firstAttribute="bottom" secondItem="4wT-Ap-9sz" secondAttribute="bottom" constant="5" id="z6k-4V-70c"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -760,13 +758,14 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GZG-2o-iAp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2868" y="-417"/>
+            <point key="canvasLocation" x="2866.666666666667" y="-417.1875"/>
         </scene>
     </scenes>
     <resources>
         <image name="back_button" width="18" height="18"/>
         <image name="house.fill" catalog="system" width="128" height="106"/>
         <image name="star" catalog="system" width="128" height="116"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
         <image name="youtube" width="64" height="64"/>
     </resources>
 </document>
