@@ -76,7 +76,31 @@ class CoreData
         return favouriteLeagues
     }
     
+    // delete the favouriteLeague from the corData
     
+    func deleteFromFavouriteLeagues(league: League){
+        DispatchQueue.global(qos: .background).async {[weak self] in
+        guard let self = self else {return}
+            
+        do {
+            if let mContext = self.manageContext{
+                
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavouritesLeaguesEntity")
+                
+                
+            let result = try mContext.fetch(fetchRequest)
+                
+            mContext.delete((result as! [NSManagedObject]).first!)
+                
+            try self.manageContext?.save()
+                
+            print("successful deleting")
+               }
+           } catch let error {
+               print("Deleting the item is failed:", error)
+           }
+        }
+    }
     
     
     
