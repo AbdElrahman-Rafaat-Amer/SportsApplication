@@ -34,7 +34,6 @@ class AllFavoriteTableViewController: UITableViewController {
        
            presenter.attachView(viewController: self)
        
-           presenter.setSport(sportName: sportName!)
            presenter.getLeaguesFromCoreData()
            
        }
@@ -80,7 +79,7 @@ class AllFavoriteTableViewController: UITableViewController {
               let LeaguesDetailsScreen = self.storyboard?.instantiateViewController(identifier: "leagueDetails")
                   as! LeagueInformationViewController
               
-              LeaguesDetailsScreen.leagueName = leagues[indexPath.row].strLeague
+              LeaguesDetailsScreen.league = leagues[indexPath.row]
               LeaguesDetailsScreen.modalPresentationStyle = .fullScreen
               self.present(LeaguesDetailsScreen, animated: true, completion: nil)
           }

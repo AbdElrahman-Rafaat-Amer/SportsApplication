@@ -13,7 +13,7 @@ enum NetworkHelper : String{
 
 enum EndPoints : String {
     case allSports        = "all_sports.php"
-    case allLeagues       = "search_all_leagues.php?s="    //pass sport name
+    case allLeagues       = "search_all_leagues.php?c=England&s="    //pass sport name
     case allTeamsInLeague = "search_all_teams.php?l="      //pass league name
     case allLastEventsInLeague   = "eventsseason.php?id="  //pass league id
     // get 100 result / events for league
