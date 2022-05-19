@@ -584,18 +584,22 @@
                     </view>
                     <navigationItem key="navigationItem" id="Fj7-zS-LHQ"/>
                     <connections>
-                        <outlet property="countryName" destination="e80-EF-9h5" id="YXe-u1-9gj"/>
+                        <outlet property="countryName" destination="e80-EF-9h5" id="A4g-O3-TSK"/>
                         <outlet property="detailview" destination="ec9-HE-5Z0" id="dki-VI-sxD"/>
-                        <outlet property="formedYear" destination="yZd-Sj-SFR" id="9o1-6D-8uh"/>
-                        <outlet property="leagueName" destination="aQg-OH-eIc" id="L2F-l1-dyp"/>
+                        <outlet property="formedYear" destination="yZd-Sj-SFR" id="o7t-oY-Wgb"/>
+                        <outlet property="leagueName" destination="aQg-OH-eIc" id="MdV-iT-dyL"/>
                         <outlet property="locationView" destination="gog-Rb-gew" id="AWv-o8-MUQ"/>
+                        <outlet property="logoImage" destination="rSt-5g-vY0" id="lhI-AZ-oXp"/>
                         <outlet property="nameView" destination="g4c-5c-dBP" id="3hi-3W-lAS"/>
                         <outlet property="stadeNameView" destination="8GG-tD-zCn" id="6a8-B1-hio"/>
+                        <outlet property="stadiumImage" destination="hE1-bM-jB6" id="2ai-ws-SFb"/>
+                        <outlet property="stadiumLocation" destination="Kgx-I0-kvI" id="Uk5-1I-qac"/>
+                        <outlet property="stadiumName" destination="upj-8Z-reT" id="UBf-rX-CEb"/>
                         <outlet property="staduimImage" destination="hE1-bM-jB6" id="iXg-nv-vey"/>
                         <outlet property="staduimLocation" destination="Kgx-I0-kvI" id="6dm-9l-a1b"/>
                         <outlet property="staduimName" destination="upj-8Z-reT" id="3bX-5l-WtM"/>
                         <outlet property="teamLogo" destination="rSt-5g-vY0" id="yEP-a9-xjW"/>
-                        <outlet property="teamName" destination="ZeN-Va-aOA" id="cI4-2y-f2g"/>
+                        <outlet property="teamName" destination="ZeN-Va-aOA" id="02y-2W-63b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OMy-nB-OKQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
