@@ -7,19 +7,20 @@
 //
 
 import UIKit
+import CoreData
 
 class AllFavoriteTableViewController: UITableViewController {
     
    
    let indicator = UIActivityIndicatorView(style: .large)
    
-     var presenter : FavouriteLeaguesPresenter!
+    // var presenter : FavouriteLeaguesPresenter!
    
      var sportName : String?
    
-     var leagues : [League] = []
+     var leagues : [LeagueEntity] = []
     
-    var result:[String:[FavouritesLeaguesEntity]] = [:]
+    //var result:[String:[FavouritesLeaguesEntity]] = [:]
    
 
    override func viewDidLoad() {
@@ -30,13 +31,38 @@ class AllFavoriteTableViewController: UITableViewController {
            self.view.addSubview(indicator)
            indicator.startAnimating()
            
-           presenter = FavouriteLeaguesPresenter()
+         ///  presenter = FavouriteLeaguesPresenter()
        
-           presenter.attachView(viewController: self)
+         //  presenter.attachView(viewController: self)
        
-           presenter.getLeaguesFromCoreData()
-           
+          // presenter.getLeaguesFromCoreData()
+           fetchDataOffline()
        }
+    
+    func fetchDataOffline(){
+         let appDelegate = UIApplication.shared.delegate as! AppDelegate
+         let context = appDelegate.persistentContainer.viewContext
+         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "LeagueEntity")
+         do{
+             let returnedLeague = try context.fetch(fetchRequest)
+             print("favourite")
+            
+             print(returnedLeague.count)
+             
+             for i in stride(from: 0, to: returnedLeague.count, by: 1){
+                 self.leagues.append(returnedLeague[i] as! LeagueEntity)
+              //   DispatchQueue.main.async {
+                     self.tableView.reloadData()
+               //  }
+                 
+             }
+             
+         }catch {
+             print("can not retrive data")
+         }
+     }
+    
+    
    
    
   
@@ -44,11 +70,11 @@ class AllFavoriteTableViewController: UITableViewController {
    // MARK: - Table view data source
    
     override func numberOfSections(in tableView: UITableView) -> Int {
-          return presenter.getFavLeaguesSectionCount()
+         return leagues.count
       }
 
       override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-          return presenter.getFavLeaguesRowCount(index: section)
+        return 1
       }
       
       override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -58,13 +84,13 @@ class AllFavoriteTableViewController: UITableViewController {
           if var leagueCell = tableView.dequeueReusableCell(withIdentifier: "favouriteSport", for: indexPath) as? FavouriteTableViewCell {
               
            
-             /* leagueCell.configrationCellLeagueLabel(with: leagues[indexPath.row].strLeague ?? "strLeague")
+              leagueCell.configrationCellLeagueLabel(with: leagues[indexPath.row].strLeague ?? "strLeague")
               
               leagueCell.congigrationCellLeagueImage(with: leagues[indexPath.row].strBadge ?? "strBadge" )
               
               leagueCell.congigrationCellLeagueYoutube(with: leagues[indexPath.row].strYoutube ?? "strYoutube" )
-             */
-            presenter.configure(cell: &leagueCell, forSection: indexPath.section, forIndex: indexPath.row)
+            
+         //   presenter.configure(cell: &leagueCell, forSection: indexPath.section, forIndex: indexPath.row)
             
               cell = leagueCell
               
@@ -79,7 +105,7 @@ class AllFavoriteTableViewController: UITableViewController {
               let LeaguesDetailsScreen = self.storyboard?.instantiateViewController(identifier: "leagueDetails")
                   as! LeagueInformationViewController
               
-              LeaguesDetailsScreen.league = leagues[indexPath.row]
+          //    LeaguesDetailsScreen.league = leagues[indexPath.row]
               LeaguesDetailsScreen.modalPresentationStyle = .fullScreen
               self.present(LeaguesDetailsScreen, animated: true, completion: nil)
           }
@@ -95,16 +121,8 @@ class AllFavoriteTableViewController: UITableViewController {
           func renderTableView() {
            
               
-              if(presenter.leagues == nil){
-                  print("favleagues null in All table view controller")
-              }else{
-                  leagues = presenter.leagues.map({ (item) -> League in
-    
-                    return item
-                  })
-                  self.tableView.reloadData()
+            
               }
-          }
-          
+                    
           
     }

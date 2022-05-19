@@ -7,10 +7,13 @@
 //
 
 import UIKit
-//import CoreData
+import CoreData
 class LeagueInformationViewController: UIViewController {
     
-    //  let coreData: CoreData = CoreData()
+
+    
+    
+     let coreData: CoreData = CoreData()
     //  var league : League = League()
     
     private var isFavorite: Bool = false
@@ -40,11 +43,15 @@ class LeagueInformationViewController: UIViewController {
         
         if(isFavorite){
             sender.isSelected = isFavorite
-            //   coreData.insertfavouriteLeague(league :league)
+            coreData.addLeague(league :league)
+           
             print("add to favroite")
             showToastView(messsage: "add to favroite", view: self.view)
         }else{
             sender.isSelected = isFavorite
+            
+        //    viewContext.delete(league)
+            
             //  coreData.deleteFromFavouriteLeagues(league: league)
             print("remove from favroite")
             showToastView(messsage: "remove from favroite", view: self.view)
@@ -55,6 +62,9 @@ class LeagueInformationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        viewContext = appDelegate.persistentContainer.viewContext
         
         stratAnimating()
         setupPresenter()
@@ -192,6 +202,7 @@ extension LeagueInformationViewController : UICollectionViewDataSource, UICollec
         
     }
     
+       
     
     
 }

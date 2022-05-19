@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class FavouriteLeaguesPresenter{
+/*class FavouriteLeaguesPresenter{
     
     var  coredata : CoreData = CoreData()
     
@@ -57,4 +57,4 @@ class FavouriteLeaguesPresenter{
         }
     
     
-}
+}*/
