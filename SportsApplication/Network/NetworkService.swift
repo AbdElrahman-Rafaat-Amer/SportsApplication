@@ -20,6 +20,7 @@ class NetworkService : MovieService{
         let newParameterName = setUpParameters(parameters : parameterName)
         print("parameterName \(newParameterName)//")
         
+        // url step1
         let url = URL(string: NetworkHelper.baseURL.rawValue +  endPoint + newParameterName)
         print("\(NetworkHelper.baseURL.rawValue)\(endPoint)\(newParameterName)")
         
@@ -28,8 +29,13 @@ class NetworkService : MovieService{
             print("Error in URL")
             return
         }
+        
+        // request step 2
         let request = URLRequest(url: newUrl)
+        
+        // session step 3
         let session = URLSession(configuration: URLSessionConfiguration.default)
+        // task step 4
         let task = session.dataTask(with: request) { (data, response, error) in
             guard let data = data else{
                 print("Error in Data")
@@ -37,8 +43,11 @@ class NetworkService : MovieService{
             }
             
             do{
+                
+                // result
                 let result = try JSONDecoder().decode(T.self, from: data)
                 complitionHandler(result)
+                
             }catch let error{
                 print("Error in decoder")
                 print(error.localizedDescription)
