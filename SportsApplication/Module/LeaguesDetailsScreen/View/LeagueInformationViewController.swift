@@ -175,7 +175,12 @@ extension LeagueInformationViewController : UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView {
         case teamsCollectionView:
-            print("team name----> \(teams[indexPath.row].strTeam ?? "teamName")")
+            let TeamDetailsScreen = self.storyboard?.instantiateViewController(identifier: "TeamDetailsViewController")
+                   as! TeamDetailsViewController
+               
+            TeamDetailsScreen.myTeamName =  teams[indexPath.row].strTeam
+               TeamDetailsScreen.modalPresentationStyle = .fullScreen
+               self.navigationController?.pushViewController(TeamDetailsScreen, animated: true)
             break
             
         case eventsCollectionView:

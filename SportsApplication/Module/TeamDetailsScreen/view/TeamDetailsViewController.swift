@@ -13,6 +13,7 @@ class TeamDetailsViewController: UIViewController {
 
     
     var myTeam : Team?
+    var myTeamName : String?
     
     @IBOutlet weak var stadiumImage: UIImageView!
     
