@@ -16,12 +16,12 @@ class TeamsCollectionViewCell: UICollectionViewCell {
     }
     
     override func layoutSubviews() {
-        teamImageView.layer.cornerRadius = teamImageView.bounds.height / 2
-        teamImageView.clipsToBounds = true
+       // teamImageView.layer.cornerRadius = teamImageView.bounds.height / 2
+      //  teamImageView.clipsToBounds = true
     }
     
     override func draw(_ rect: CGRect) {
-        self.layer.cornerRadius = self.frame.size.width / 2
+       // self.layer.cornerRadius = self.frame.size.width / 2
     }
 }
 

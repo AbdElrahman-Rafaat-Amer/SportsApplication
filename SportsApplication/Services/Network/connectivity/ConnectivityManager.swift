@@ -20,6 +20,22 @@ public protocol NetworkConnectionStatusListener: class {
 }
 class ConnectivityMananger: NSObject {
     
+    private static let manager = NetworkReachabilityManager(host: "www.apple.com")
+    
+    private static func isNetworkReachable() -> Bool {
+        return manager?.isReachable ?? false
+    }
+    
+    static func checkNetwork() -> Bool{
+        var isConnected : Bool = false
+        if isNetworkReachable(){
+            isConnected = true
+            
+        }
+        return isConnected
+    }
+    
+    
     private override init() {
         super.init()
         configureReachability()

@@ -19,17 +19,8 @@ class AllLeaguesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("SportName----> \(sportName ?? "sportName")")
         navigationItem.title = sportName
-        indicator.center = self.view.center
-        self.view.addSubview(indicator)
-        indicator.startAnimating()
-        
-        presenter = AllLeaguesViewPresenter()
-        presenter.attachView(viewController: self)
-        presenter.setSport(sportName: sportName!)
-        presenter.getLeaguesFromAPI()
-        
+        refreshTableView()
     }
     
     // MARK: - Table view data source
@@ -48,8 +39,6 @@ class AllLeaguesTableViewController: UITableViewController {
         
         if let leagueCell = tableView.dequeueReusableCell(withIdentifier:  "LeagueViewCell", for: indexPath) as? LeagueTableViewCell {
             
-            //   leagueCell.layer.cornerRadius = leagueCell.bounds.height / 2
-            // leagueCell.clipsToBounds = true
             leagueCell.configrationCellLeagueLabel(with: leagues[indexPath.row].strLeague ?? "strLeague")
             
             leagueCell.congigrationCellLeagueImage(with: leagues[indexPath.row].strBadge ?? "strBadge" )
@@ -57,7 +46,6 @@ class AllLeaguesTableViewController: UITableViewController {
             leagueCell.congigrationCellLeagueYoutube(with: leagues[indexPath.row].strYoutube ?? "strYoutube" )
             
             cell = leagueCell
-            
         }
         
         return cell
@@ -66,12 +54,16 @@ class AllLeaguesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("select leage \(leagues[indexPath.row].idLeague ?? "idLeague")")
         
-        let LeaguesDetailsScreen = self.storyboard?.instantiateViewController(identifier: "leagueDetails")
-            as! LeagueInformationViewController
-        
-        LeaguesDetailsScreen.league = leagues[indexPath.row]
-        LeaguesDetailsScreen.modalPresentationStyle = .fullScreen
-        self.present(LeaguesDetailsScreen, animated: true, completion: nil)
+        if(ConnectivityMananger.checkNetwork()){
+            let LeaguesDetailsScreen = self.storyboard?.instantiateViewController(identifier: "leagueDetails")
+                as! LeagueInformationViewController
+            
+            LeaguesDetailsScreen.league = leagues[indexPath.row]
+            LeaguesDetailsScreen.modalPresentationStyle = .fullScreen
+            self.present(LeaguesDetailsScreen, animated: true, completion: nil)
+        }else{
+            showAlert(title: "Connection Failed", message: "You are offline\nPlease connect to newtwork\nthenTry again", view : self)
+        }
     }
     
     
@@ -91,8 +83,43 @@ extension AllLeaguesTableViewController : ResultAPIProtocl{
                 return item
             })
             self.tableView.reloadData()
+            self.tableView.refreshControl?.endRefreshing()
+        }
+    }
+}
+
+extension AllLeaguesTableViewController{
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if(ConnectivityMananger.checkNetwork()){
+            startAnimating()
+            setupPresenter()
+        }else{
+            showAlert(title: "Connection Failed", message: "You are offline\nPlease connect to newtwork\nthenTry again", view : self)
         }
     }
     
+    private func refreshTableView(){
+        self.tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(callPullToRefresh), for: .valueChanged)
+    }
     
+    @objc private func callPullToRefresh(){
+        presenter.getLeaguesFromAPI()
+    }
+    
+    private func startAnimating(){
+        indicator.center = self.view.center
+        self.view.addSubview(indicator)
+        indicator.startAnimating()
+    }
+    
+    private func setupPresenter(){
+        presenter = AllLeaguesViewPresenter()
+        presenter.attachView(viewController: self)
+        presenter.setSport(sportName: sportName!)
+        presenter.getLeaguesFromAPI()
+    }
 }

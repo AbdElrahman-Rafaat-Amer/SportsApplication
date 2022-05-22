@@ -9,52 +9,26 @@
 import Foundation
 import CoreData
 
-/*class FavouriteLeaguesPresenter{
+class FavouriteLeaguesPresenter{
     
-    var  coredata : CoreData = CoreData()
+    private let coreData = CoreDataService.getInstance()
     
-    var result:[String:[FavouritesLeaguesEntity]] = [:]
+    weak var viewController : ResultAPIProtocl!
+     var favouriteleagues : [LeagueEntity]!
     
-    
-    var leagues : [League]!
-    
-    private var sportName : String!
-      
-      weak var viewController : ResultAPIProtocl!
-      
-      func attachView(viewController: ResultAPIProtocl){
-          self.viewController = viewController
-      }
-      
-      func setSport(sportName: String){
-          self.sportName = sportName
-      }
-    
-    func getLeaguesFromCoreData(){
-        
-      result =  coredata.retrieveFavouriteLeagues()
-     
-        
+    func attachView(viewController: ResultAPIProtocl){
+        self.viewController = viewController
     }
     
-
-      func getFavLeaguesSectionCount() -> Int {
-          return result.count
-      }
-      func getFavLeaguesRowCount(index:Int) -> Int
-      {
-         
-          return Array(result)[index].value.count
-      }
     
-    func configure(cell:inout FavouriteTableViewCell,forSection:Int,forIndex:Int) {
-        let league = Array(result)[forSection].value[forIndex]
-        cell.congigrationCellLeagueImage(with: league.strBadge ?? "")
+    func getAllFavoriteSports(){
         
-        cell.configrationCellLeagueLabel(with: league.strLeague ?? "Not found")
+      favouriteleagues =  coreData.fetchDataOffline()
+    DispatchQueue.main.async {
+          self.viewController.renderTableView()
+        self.viewController.stopAnimating()
         
-        cell.congigrationCellLeagueYoutube(with: league.strYoutube ?? "" )
         }
+    }
     
-    
-}*/
+}

@@ -23,21 +23,7 @@ class AllLeaguesViewPresenter {
     }
     
     func getLeaguesFromAPI(){
-        /*  NetworkService.getAllLeagues(sportName : sportName){[weak self] (result) in
-         for i in 0...(result?.countries.count)!-1{
-         print(result?.countries[i].strBadge ?? "strBadge")
-         print(result?.countries[i].strLeague ?? "strLeague")
-         print(result?.countries[i].strYoutube ?? "strYoutube")
-         
-         }
-         self?.leagues = result?.countries
-         DispatchQueue.main.async {
-         self?.viewController.renderTableView()
-         self?.viewController.stopAnimating()
-         }
-         
-         }*/
-        
+              
         NetworkService.loadDataFromAPi(parameterName : sportName, endPoint: EndPoints.allLeagues.rawValue){[weak self] (result: AllLeagues?) in
             print("number of leagues ---> \(result?.countries.count ?? -1)")
             if((result?.countries.isEmpty) == nil){

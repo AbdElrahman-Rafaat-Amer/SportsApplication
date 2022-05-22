@@ -19,21 +19,7 @@ class AllSportsCollectionViewPresenter {
     
     
     func getAllSportsFromAPI(){
-        /* NetworkService.getAllSports{[weak self] (res) in
-         for i in 0...(res?.sports.count)!-1{
-         print(res?.sports[i].strSport ?? "strSport")
-         print(res?.sports[i].strSportThumb ?? "sportThumb")
-         print(res?.sports[i].strSportIconGreen ?? "iconGreen")
-         
-         }
-         self?.sports = res?.sports
-         DispatchQueue.main.async {
-         self?.viewController.renderTableView()
-         self?.viewController.stopAnimating()
-         }
-         
-         }*/
-        
+               
         NetworkService.loadDataFromAPi(endPoint: EndPoints.allSports.rawValue){ [weak self] (result : AllSports?) in
             
             print("number of sports ---> \(result?.sports.count ?? -1)")

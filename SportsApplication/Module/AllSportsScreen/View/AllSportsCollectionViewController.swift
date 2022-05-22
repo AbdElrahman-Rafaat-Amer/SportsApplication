@@ -18,16 +18,7 @@ class AllSportsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "All Sports"
-        
-        
-        indicator.center = self.view.center
-        self.view.addSubview(indicator)
-        indicator.startAnimating()
-        
-        presenter = AllSportsCollectionViewPresenter()
-        presenter.attachView(viewController: self)
-        
-        presenter.getAllSportsFromAPI()
+        refreshTableView()
     }
     
     
@@ -52,12 +43,17 @@ class AllSportsCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Selected Sport \(sports[indexPath.row].strSport ?? "strSport")")
-        let AllLegauesScreen = self.storyboard?.instantiateViewController(identifier: "allLeagues")
-            as! AllLeaguesTableViewController
+        if(ConnectivityMananger.checkNetwork()){
+            let AllLegauesScreen = self.storyboard?.instantiateViewController(identifier: "allLeagues")
+                as! AllLeaguesTableViewController
+            
+            AllLegauesScreen.sportName =  sports[indexPath.row].strSport
+            AllLegauesScreen.modalPresentationStyle = .fullScreen
+            self.navigationController?.pushViewController(AllLegauesScreen, animated: true)
+        }else{
+            showAlert(title: "Connection Failed", message: "You are offline\nPlease connect to newtwork\nthenTry again", view : self)
+        }
         
-        AllLegauesScreen.sportName =  sports[indexPath.row].strSport
-        AllLegauesScreen.modalPresentationStyle = .fullScreen
-        self.navigationController?.pushViewController(AllLegauesScreen, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -67,32 +63,40 @@ class AllSportsCollectionViewController: UICollectionViewController {
     
 }
 
-extension AllSportsCollectionViewController : NetworkConnectionStatusListener{
-    func networkStatusDidChange(status: NetworkConnectionStatus) {
-        print("---------------------------------------------------------")
-        switch status{
-        case .offline:
-            //showAlertWith(message : "Offline")
-            print("offline-----------------------------------")
-            
-        case .online:
-            //    showAlertWith(message : "online")
-            print("online-------------------------------------")
-        }
-    }
-}
 
 extension AllSportsCollectionViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        ConnectivityMananger.shared().addListener(listener: self)
-        print("viewWillAppear")
+        
+        if(ConnectivityMananger.checkNetwork()){
+            startAnimating()
+            setupPresenter()
+        }else{
+            showAlert(title: "Connection Failed", message: "You are offline\nPlease connect to newtwork\nthenTry again", view : self)
+        }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        ConnectivityMananger.shared().removeListener(listener: self)
-        print("viewWillDisappear")
+    
+    private func refreshTableView(){
+        self.collectionView.refreshControl = UIRefreshControl()
+        collectionView.refreshControl?.addTarget(self, action: #selector(callPullToRefresh), for: .valueChanged)
+    }
+    
+    @objc private func callPullToRefresh(){
+        presenter.getAllSportsFromAPI()
+    }
+    
+    
+    private func startAnimating(){
+        indicator.center = self.view.center
+        self.view.addSubview(indicator)
+        indicator.startAnimating()
+    }
+    
+    private func setupPresenter(){
+        presenter = AllSportsCollectionViewPresenter()
+        presenter.attachView(viewController: self)
+        presenter.getAllSportsFromAPI()
     }
 }
 
@@ -111,6 +115,7 @@ extension AllSportsCollectionViewController : ResultAPIProtocl{
                 return item
             })
             self.collectionView.reloadData()
+            self.collectionView.refreshControl?.endRefreshing()
         }
     }
     

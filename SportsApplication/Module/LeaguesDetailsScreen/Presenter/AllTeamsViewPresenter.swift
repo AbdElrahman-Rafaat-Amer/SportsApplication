@@ -11,7 +11,8 @@ import Foundation
 class AllTeamsViewPresenter {
     
     var teams : [Team]!
-    var events : [Event]!
+    var lastEvents : [Event]!
+    var upComingEvents : [Event]!
     private var league : League!
     
     weak var teamsViewController : ResultAPIProtocl!
@@ -46,13 +47,25 @@ class AllTeamsViewPresenter {
         NetworkService.loadDataFromAPi(parameterName : league.idLeague ?? "", endPoint: EndPoints.allLastEventsInLeague.rawValue){[weak self] (result: AllEvents?) in
             print("number of events ---> \(result?.events.count ?? -1)")
             if((result?.events.isEmpty) == nil){
-                print("no teams exist")
+                print("no events exist")
             }else{
-                for i in 0...(result?.events.count)!-1{
+              /*  for i in 0...(result?.events.count)!-1{
                     print(result?.events[i].strEvent ?? "strEvent")
-                }
+                }*/
+                let formater = DateFormatter()
+                formater.dateFormat = "yyyy-MM-dd"
+                let dateNow = formater.string(from: Date())
+              
+                self?.lastEvents = result?.events.filter{$0.dateEvent ?? "" < dateNow}
+                
+                self?.upComingEvents = result?.events.suffix((result?.events.count)! - (self?.lastEvents.count)!)
+                
+                print("result count \(result?.events.count ?? -1)")
+                print("lastEvents count \(self?.lastEvents.count ?? -2)")
+                print("upComingEvents count \(self?.upComingEvents.count ?? -3)")
+                
             }
-            self?.events = result?.events
+            self?.lastEvents = result?.events
             DispatchQueue.main.async {
                 self?.teamsViewController.renderTableView()
                 self?.teamsViewController.stopAnimating()

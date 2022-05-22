@@ -8,84 +8,61 @@
 
 import UIKit
 import CoreData
+
 class LeagueInformationViewController: UIViewController {
     
-
-    
-    
-     let coreData: CoreData = CoreData()
-    //  var league : League = League()
+    let coreData = CoreDataService.getInstance()
     
     private var isFavorite: Bool = false
     var league : League?
     let indicator = UIActivityIndicatorView(style: .large)
     var presenter : AllTeamsViewPresenter!
     var teams : [Team] = []
-    var events : [Event] = []
-    
+    var upComingEvents : [Event] = []
+    var lastEvents : [Event] = []
     //View of Storyboard
     
-    @IBOutlet weak var teamsCollectionView: UICollectionView!
+    @IBOutlet weak var noUpComingEvents: UILabel!
     
-    @IBOutlet weak var eventsCollectionView: UICollectionView!
+    @IBOutlet weak var noTeamsFounded: UILabel!
+    
     
     @IBOutlet weak var resultCollectionView: UICollectionView!
     
-    @IBOutlet weak var leagueNameTextView: UILabel!
+    @IBOutlet weak var eventsCollectionView: UICollectionView!
+    
+    @IBOutlet weak var teamsCollectionView: UICollectionView!
+    
+    @IBOutlet weak var addToFavoriteButton: UIButton!
     
     @IBAction func backButton(_ sender: Any) {
         print("back button to leagues screen")
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func addToFavoriteButton(_ sender: UIButton) {
+    @IBAction func addToFavoriteButton(_ sender: Any) {
         isFavorite = !isFavorite
         
         if(isFavorite){
-            sender.isSelected = isFavorite
-            coreData.addLeague(league :league)
-           
-            print("add to favroite")
-            showToastView(messsage: "add to favroite", view: self.view)
+            coreData.addLeagueToFavorites(league :league!)
+          //  showToastView(messsage: "add to favroite", view: self.view)
+            
+            self.view.addSubview( showImageViewAsToast(isFavorite : isFavorite, view: self.view))
         }else{
-            sender.isSelected = isFavorite
-            
-        //    viewContext.delete(league)
-            
-            //  coreData.deleteFromFavouriteLeagues(league: league)
-            print("remove from favroite")
-            showToastView(messsage: "remove from favroite", view: self.view)
+            coreData.deleteLeagueFromFavorites(league: league!)
+          //  showToastView(messsage: "remove from favroite", view: self.view)
+           self.view.addSubview( showImageViewAsToast(isFavorite : isFavorite, view: self.view))
         }
-        
-        
+        addToFavoriteButton.isSelected = isFavorite
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        viewContext = appDelegate.persistentContainer.viewContext
         
         stratAnimating()
         setupPresenter()
-        
-        teamsCollectionView.dataSource = self
-        teamsCollectionView.delegate = self
-        
-        eventsCollectionView.dataSource = self
-        eventsCollectionView.delegate = self
-        
-        resultCollectionView.dataSource = self
-        resultCollectionView.delegate = self
+        setupProtocls()
+        isFavoruiteLeague()
     }
-    
-    private func setupPresenter() {
-        presenter = AllTeamsViewPresenter()
-        presenter.attachView(teamsViewController: self)
-        presenter.setleagueName(league: league!)
-        presenter.getTeamsFromAPI()
-    }
-    
     
 }
 
@@ -106,13 +83,17 @@ extension LeagueInformationViewController : ResultAPIProtocl{
             self.teamsCollectionView.reloadData()
         }
         
-        if(presenter.events == nil){
+        if(presenter.lastEvents == nil){
             print("events null in view controller")
         }else{
-            events = presenter.events.map({ (item) -> Event in
+            lastEvents = presenter.lastEvents.map({ (item) -> Event in
                 return item
             })
-            print("event count \(events.count)")
+            
+            upComingEvents = presenter.upComingEvents.map({ (item) -> Event in
+                return item
+            })
+            print("lastEvents count \(lastEvents.count)")
             self.eventsCollectionView.reloadData()
             self.resultCollectionView.reloadData()
         }
@@ -135,10 +116,10 @@ extension LeagueInformationViewController : UICollectionViewDataSource, UICollec
             return teams.count
             
         case eventsCollectionView:
-            return events.count
+            return upComingEvents.count
             
         case resultCollectionView:
-            return events.count
+            return lastEvents.count
             
         default:
             return 0
@@ -153,6 +134,11 @@ extension LeagueInformationViewController : UICollectionViewDataSource, UICollec
             if let teamCell = collectionView.dequeueReusableCell(withReuseIdentifier: "teamsCell", for: indexPath) as? TeamsCollectionViewCell {
                 
                 teamCell.configrationTeamCell(with: teams[indexPath.row].strTeamBadge ?? "teamImage")
+                
+                if(teams.count > 0){
+                    noTeamsFounded.isHidden = true
+                }
+                
                 cell = teamCell
             }
             break
@@ -160,7 +146,12 @@ extension LeagueInformationViewController : UICollectionViewDataSource, UICollec
         case eventsCollectionView:
             if let eventCell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventCell", for: indexPath) as? EventsCollectionViewCell {
                 
-                eventCell.configrationUpComingEventsCell(with: events[indexPath.row])
+                eventCell.configrationUpComingEventsCell(with: upComingEvents[indexPath.row])
+                
+                if(upComingEvents.count > 0){
+                    noUpComingEvents.isHidden = true
+                }
+                
                 cell = eventCell
             }
             break
@@ -168,7 +159,7 @@ extension LeagueInformationViewController : UICollectionViewDataSource, UICollec
         case resultCollectionView:
             if let resultCell = collectionView.dequeueReusableCell(withReuseIdentifier: "resultCell", for: indexPath) as? ResultCollectionViewCell {
                 
-                resultCell.configrationLastEventsCell(with: events[indexPath.row])
+                resultCell.configrationLastEventsCell(with: lastEvents[indexPath.row])
                 cell = resultCell
             }
             break
@@ -188,10 +179,11 @@ extension LeagueInformationViewController : UICollectionViewDataSource, UICollec
             break
             
         case eventsCollectionView:
-            print("event name----> \(events[indexPath.row].strEvent ?? "strEvent")")
+            print("upComingEvents name----> \(upComingEvents[indexPath.row].strEvent ?? "strEvent")")
             break
             
         case resultCollectionView:
+            print("lastEvents name----> \(lastEvents[indexPath.row].strEvent ?? "strEvent")")
             print("results ")
             break
             
@@ -201,8 +193,34 @@ extension LeagueInformationViewController : UICollectionViewDataSource, UICollec
         }
         
     }
+}
+
+extension LeagueInformationViewController{
+    private func setupPresenter() {
+        presenter = AllTeamsViewPresenter()
+        presenter.attachView(teamsViewController: self)
+        presenter.setleagueName(league: league!)
+        presenter.getTeamsFromAPI()
+        
+    }
     
-       
+    private func isFavoruiteLeague(){
+        isFavorite = coreData.isFavoriteLeague(league: league!)
+        print("isFavorite------> \(isFavorite)")
+        if(isFavorite){
+            addToFavoriteButton.isSelected = true
+        }
+        
+    }
     
-    
+    private func setupProtocls(){
+        teamsCollectionView.dataSource = self
+        teamsCollectionView.delegate = self
+        
+        eventsCollectionView.dataSource = self
+        eventsCollectionView.delegate = self
+        
+        resultCollectionView.dataSource = self
+        resultCollectionView.delegate = self
+    }
 }

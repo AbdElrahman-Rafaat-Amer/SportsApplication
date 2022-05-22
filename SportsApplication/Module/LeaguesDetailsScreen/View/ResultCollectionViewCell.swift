@@ -10,7 +10,7 @@ import UIKit
 
 class ResultCollectionViewCell: UICollectionViewCell {
     
-    
+    /*
     @IBOutlet weak var homeTeamScore: UILabel!
     
     @IBOutlet weak var eventDate: UILabel!
@@ -19,19 +19,25 @@ class ResultCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var awayTeamScore: UILabel!
     
+    @IBOutlet weak var eventStatus: UILabel!
+    */
+    
     @IBOutlet weak var eventImageView: UIImageView!
     
-    @IBOutlet weak var eventStatus: UILabel!
+    @IBOutlet weak var eventDate: UILabel!
     
+    @IBOutlet weak var homeTeamScore: UILabel!
+    
+    @IBOutlet weak var awayTeamScore: UILabel!
+    
+    @IBOutlet weak var eventName: UILabel!
     
     func configrationLastEventsCell(with event : Event){
-        eventImageView.kf.setImage(with: URL(string: event.strThumb ?? "eventIconHolder"))
-        
-        eventTime.text = event.strTime
-        eventDate.text = event.eventDate
+        eventImageView.kf.setImage(with: URL(string: event.strThumb ?? ""), placeholder: UIImage(named: "lastEvent"))
+        eventName.text = event.strEvent
+        eventDate.text = event.dateEvent
         homeTeamScore.text = event.intHomeScore
         awayTeamScore.text = event.intAwayScore
-        eventStatus.text = event.strStatus
         
     }
     

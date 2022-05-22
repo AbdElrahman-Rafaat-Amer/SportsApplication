@@ -12,7 +12,7 @@ class Event : Decodable {
 
     var idEvent : String?
     var strEvent : String?
-    var eventDate : String?
+    var dateEvent : String?
     var strHomeTeam : String?
     var strAwayTeam : String?
     var intHomeScore : String?

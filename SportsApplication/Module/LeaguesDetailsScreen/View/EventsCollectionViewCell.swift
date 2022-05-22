@@ -16,12 +16,12 @@ class EventsCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var nameOfUpComingEvent: UILabel!
     
-    
     func configrationUpComingEventsCell(with event : Event){
-        upComingEventImageView.kf.setImage(with: URL(string: event.strThumb ?? "eventIconHolder"))
+        upComingEventImageView.kf.setImage(with: URL(string: event.strThumb ?? ""), placeholder: UIImage(named: "upComingEvent"))
         
         nameOfUpComingEvent.text = event.strEvent
-        dateOfUpComingEvent.text = event.eventDate
+        dateOfUpComingEvent.text = event.dateEvent
+   
     }
     
 }
