@@ -172,15 +172,30 @@ extension LeagueInformationViewController : UICollectionViewDataSource, UICollec
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+    {
         switch collectionView {
+            
         case teamsCollectionView:
-            let TeamDetailsScreen = self.storyboard?.instantiateViewController(identifier: "TeamDetailsViewController")
-                   as! TeamDetailsViewController
+            
+            print("selected team  \(teams[indexPath.row].strTeam ?? "strTeam")")
+            
+            if(ConnectivityMananger.checkNetwork()){
+            let teamDetailsScreen = self.storyboard?.instantiateViewController(identifier: "teamDetails")
+            as! TeamDetailsViewController
                
-            TeamDetailsScreen.myTeamName =  teams[indexPath.row].strTeam
-               TeamDetailsScreen.modalPresentationStyle = .fullScreen
-               self.navigationController?.pushViewController(TeamDetailsScreen, animated: true)
+            teamDetailsScreen.myTeam =  teams[indexPath.row]
+                
+            
+        self.present(teamDetailsScreen, animated: true, completion: nil)
+                
+            }else{
+                print(" in else")
+                
+                showAlert(title: "connection failed", message: "please connect the network", view: self)
+                
+            }
+               
             break
             
         case eventsCollectionView:
