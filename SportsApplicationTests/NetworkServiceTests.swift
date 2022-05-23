@@ -26,6 +26,7 @@ class NetworkServiceTests: XCTestCase {
     
     func testLoadDataFromAPi(){
         
+        // testing allsports return
      let excpection =      expectation(description: "waiting for API")
         NetworkService.loadDataFromAPi(parameterName : "", endPoint: EndPoints.allSports.rawValue, complitionHandler: {(result : AllSports?) in
             
@@ -42,6 +43,64 @@ class NetworkServiceTests: XCTestCase {
         waitForExpectations(timeout: 5, handler: nil)
     }
     
+   func testLoadDataFromAPiForLeagues(){
+        
+        // testing leagues return
+     let excpection =      expectation(description: "waiting for API")
+        NetworkService.loadDataFromAPi(parameterName : "", endPoint: EndPoints.allLeagues.rawValue, complitionHandler: {(result : AllLeagues?) in
+            
+            guard let items = result else{
+                XCTFail()
+                excpection.fulfill()
+                
+                return
+            }; XCTAssertEqual(items.countries.count,20,"APIFailed")
+            
+            excpection.fulfill()
+            
+        })
+        waitForExpectations(timeout: 5, handler: nil)
+    }
     
+    func testLoadDataFromAPiForTeams(){
+           
+           // testing teams return
+        let excpection =      expectation(description: "waiting for API")
+           NetworkService.loadDataFromAPi(parameterName : "", endPoint: EndPoints.allTeamsInLeague.rawValue, complitionHandler: {(result : AllTeams?) in
+               
+               guard let items = result else{
+                   XCTFail()
+                   excpection.fulfill()
+                   
+                   return
+               }; XCTAssertEqual(items.teams.count,50,"APIFailed")
+               
+               excpection.fulfill()
+               
+           })
+           waitForExpectations(timeout: 5, handler: nil)
+       }
+    
+    func testLoadDataFromAPiForEvents(){
+        
+        // testing events return
+     let excpection =      expectation(description: "waiting for API")
+        NetworkService.loadDataFromAPi(parameterName : "", endPoint: EndPoints.allLastEventsInLeague.rawValue, complitionHandler: {(result : AllEvents?) in
+            
+            guard let items = result else{
+                XCTFail()
+                excpection.fulfill()
+                
+                return
+            }; XCTAssertEqual(items.events.count,100,"APIFailed")
+            
+            excpection.fulfill()
+            
+        })
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+
+
+
 
 }
