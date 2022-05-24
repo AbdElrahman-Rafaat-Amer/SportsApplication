@@ -28,7 +28,7 @@ class NetworkServiceTests: XCTestCase {
         
         // testing allsports return
         let excpection =   expectation(description: "waiting for API")
-        NetworkService.loadDataFromAPi(parameterName : "", endPoint: EndPoints.allSports.rawValue, complitionHandler: {(result : AllSports?) in
+        NetworkService.loadDataFromAPi(parameterName : "", endPoint: EndPoints.allSports.rawValue, complitionHandler: {(result : AllSports?, error) in
             
             guard let items = result else{
                 XCTFail()
@@ -47,7 +47,7 @@ class NetworkServiceTests: XCTestCase {
         
         // testing leagues return
         let excpection =  expectation(description: "waiting for API")
-        NetworkService.loadDataFromAPi(parameterName : "Soccer", endPoint: EndPoints.allLeagues.rawValue, complitionHandler: {(result : AllLeagues?) in
+        NetworkService.loadDataFromAPi(parameterName : "Soccer", endPoint: EndPoints.allLeagues.rawValue, complitionHandler: {(result : AllLeagues? , error) in
             
             guard let items = result else{
                 XCTFail()
@@ -66,7 +66,7 @@ class NetworkServiceTests: XCTestCase {
         
         // testing teams return
         let excpection =  expectation(description: "waiting for API")
-        NetworkService.loadDataFromAPi(parameterName : "English%20Premier%20League", endPoint: EndPoints.allTeamsInLeague.rawValue, complitionHandler: {(result : AllTeams?) in
+        NetworkService.loadDataFromAPi(parameterName : "English%20Premier%20League", endPoint: EndPoints.allTeamsInLeague.rawValue, complitionHandler: {(result : AllTeams?, error) in
             
             guard let items = result else{
                 XCTFail()
@@ -85,7 +85,7 @@ class NetworkServiceTests: XCTestCase {
         
         // testing events return
         let excpection =      expectation(description: "waiting for API")
-        NetworkService.loadDataFromAPi(parameterName : "4328", endPoint: EndPoints.allLastEventsInLeague.rawValue, complitionHandler: {(result : AllEvents?) in
+        NetworkService.loadDataFromAPi(parameterName : "4328", endPoint: EndPoints.allLastEventsInLeague.rawValue, complitionHandler: {(result : AllEvents? , error) in
             
             guard let items = result else{
                 XCTFail()

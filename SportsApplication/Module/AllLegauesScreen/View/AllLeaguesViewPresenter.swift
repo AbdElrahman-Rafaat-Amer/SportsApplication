@@ -42,7 +42,7 @@ class AllLeaguesViewPresenter {
     
     
     func getLeaguesFromAPI(){
-        NetworkService.getAllSports(parameterName : sportName,endPoint: EndPoints.allLeagues.rawValue){
+        NetworkService.loadDataFromAPi(parameterName : sportName,endPoint: EndPoints.allLeagues.rawValue){
             [weak self] (result : AllLeagues? , error)   in
           
             print("number of leagues ---> \(result?.countries.count ?? -1)")

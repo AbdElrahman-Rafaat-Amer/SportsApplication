@@ -27,7 +27,7 @@ class AllTeamsViewPresenter {
     
     func getTeamsFromAPI(){
         print("in teams")
-        NetworkService.getAllSports(parameterName : league.strLeague ?? "", endPoint: EndPoints.allTeamsInLeague.rawValue){[weak self] (result: AllTeams?, error) in
+        NetworkService.loadDataFromAPi(parameterName : league.strLeague ?? "", endPoint: EndPoints.allTeamsInLeague.rawValue){[weak self] (result: AllTeams?, error) in
             print("number of teams ---> \(result?.teams.count ?? -1)")
             if((result?.teams.isEmpty) == nil){
                 print("no teams exist")
@@ -44,7 +44,7 @@ class AllTeamsViewPresenter {
         }
         
         print("in Events")
-        NetworkService.getAllSports(parameterName : league.idLeague ?? "", endPoint: EndPoints.allLastEventsInLeague.rawValue){[weak self] (result: AllEvents?, error) in
+        NetworkService.loadDataFromAPi(parameterName : league.idLeague ?? "", endPoint: EndPoints.allLastEventsInLeague.rawValue){[weak self] (result: AllEvents?, error) in
             print("number of events ---> \(result?.events.count ?? -1)")
             if((result?.events.isEmpty) == nil){
                 print("no events exist")

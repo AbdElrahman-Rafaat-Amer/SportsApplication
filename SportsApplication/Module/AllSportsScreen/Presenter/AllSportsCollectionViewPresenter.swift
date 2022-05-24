@@ -40,7 +40,7 @@ class AllSportsCollectionViewPresenter {
     
     func getAllSportsFromAPI(){
         print("in getItems")
-        NetworkService.getAllSports(endPoint: EndPoints.allSports.rawValue){
+        NetworkService.loadDataFromAPi(endPoint: EndPoints.allSports.rawValue){
         [weak self] (result : AllSports? , error)   in
             print("number of sports ---> \(result?.sports.count ?? -1)")
             if((result?.sports.isEmpty) == nil){

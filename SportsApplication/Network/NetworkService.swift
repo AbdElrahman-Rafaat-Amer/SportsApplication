@@ -14,7 +14,7 @@ protocol MovieService{
 }
 class NetworkService : MovieService{
     
-    static func loadDataFromAPi <T : Decodable> (parameterName : String = "", endPoint : String ,complitionHandler : @escaping (T?) -> Void){
+    /*static func loadDataFromAPi <T : Decodable> (parameterName : String = "", endPoint : String ,complitionHandler : @escaping (T?) -> Void){
         
         print("parameterName \(parameterName)//")
         let newParameterName = setUpParameters(parameters : parameterName)
@@ -57,8 +57,8 @@ class NetworkService : MovieService{
         }
         task.resume()
     }
-    
-    static func getAllSports <T : Decodable> (parameterName : String = "", endPoint : String ,completion : @escaping (T?, Error?)->Void) {
+    */
+    static func loadDataFromAPi <T : Decodable> (parameterName : String = "", endPoint : String ,complitionHandler : @escaping (T?, Error?)->Void) {
         
         print("parameterName \(parameterName)//")
         let newParameterName = setUpParameters(parameters : parameterName)
@@ -77,12 +77,12 @@ class NetworkService : MovieService{
                 guard let AllSportData = response.value
                     else {return}
                 
-                completion(AllSportData,nil)
+                complitionHandler(AllSportData,nil)
                 
             case .failure(let error):
                 print("fail")
                 print(error)
-                completion(nil , error)
+                complitionHandler(nil , error)
             }
         }
     }

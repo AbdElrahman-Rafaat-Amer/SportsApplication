@@ -15,12 +15,14 @@ class AllLeaguesTableViewController: UITableViewController {
     var presenter : AllLeaguesViewPresenter!
     var sportName : String?
     var leagues : [League] = []
-    
+    var noLeaguesDataLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = sportName
         refreshTableView()
+        noLeaguesDataLabel = showWarning(message : "no Leagues", view: self.view)
+        self.view.addSubview(noLeaguesDataLabel)
     }
     
     // MARK: - Table view data source
@@ -82,6 +84,13 @@ extension AllLeaguesTableViewController : ResultAPIProtocl{
             leagues = presenter.leagues.map({ (item) -> League in
                 return item
             })
+            
+            if(leagues.count <= 0){
+                noLeaguesDataLabel.isHidden = false
+            }else{
+                noLeaguesDataLabel.isHidden = true
+            }
+            
             self.tableView.reloadData()
             self.tableView.refreshControl?.endRefreshing()
         }
