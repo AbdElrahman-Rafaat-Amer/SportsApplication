@@ -45,12 +45,9 @@ class LeagueInformationViewController: UIViewController {
         
         if(isFavorite){
             coreData.addLeagueToFavorites(league :league!)
-          //  showToastView(messsage: "add to favroite", view: self.view)
-            
             self.view.addSubview( showImageViewAsToast(isFavorite : isFavorite, view: self.view))
         }else{
             coreData.deleteLeagueFromFavorites(league: league!)
-          //  showToastView(messsage: "remove from favroite", view: self.view)
            self.view.addSubview( showImageViewAsToast(isFavorite : isFavorite, view: self.view))
         }
         addToFavoriteButton.isSelected = isFavorite
@@ -186,14 +183,12 @@ extension LeagueInformationViewController : UICollectionViewDataSource, UICollec
                
             teamDetailsScreen.myTeam =  teams[indexPath.row]
                 
-            
         self.present(teamDetailsScreen, animated: true, completion: nil)
                 
             }else{
                 print(" in else")
                 
                 showAlert(title: "connection failed", message: "please connect the network", view: self)
-                
             }
                
             break

@@ -18,10 +18,10 @@ class AllSportsCollectionViewPresenter {
     }
     
     
-    func getAllSportsFromAPI(){
-               
+  /*  func getAllSportsFromAPI(){
+        
         NetworkService.loadDataFromAPi(endPoint: EndPoints.allSports.rawValue){ [weak self] (result : AllSports?) in
-            
+            self?.getItems()
             print("number of sports ---> \(result?.sports.count ?? -1)")
             if((result?.sports.isEmpty) == nil){
                 print("no leagues exist")
@@ -36,5 +36,28 @@ class AllSportsCollectionViewPresenter {
                 self?.viewController.stopAnimating()
             }
         }
+    }*/
+    
+    func getAllSportsFromAPI(){
+        print("in getItems")
+        NetworkService.getAllSports(endPoint: EndPoints.allSports.rawValue){
+        [weak self] (result : AllSports? , error)   in
+            print("number of sports ---> \(result?.sports.count ?? -1)")
+            if((result?.sports.isEmpty) == nil){
+                print("no sports exist")
+            }else{
+                for i in 0...(result?.sports.count)!-1{
+                    print(result?.sports[i].strSport ?? "strSport")
+                }
+            }
+            self?.sports = result?.sports
+            DispatchQueue.main.async {
+                self?.viewController.renderTableView()
+                self?.viewController.stopAnimating()
+            }
+            
+        }
     }
+    
+    
 }

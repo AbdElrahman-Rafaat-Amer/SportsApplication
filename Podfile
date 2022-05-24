@@ -6,9 +6,8 @@ target 'SportsApplication' do
   use_frameworks!
 
   # Pods for SportsApplication
-pod 'Alamofire', '~> 4.9.1'
+
 pod 'Kingfisher', '~> 5.0'
-pod 'RxSwift' , '6.5.0'
-pod 'RxCocoa' , '6.5.0'
+pod 'Alamofire', '~> 5.0.0-beta.6'
 
 end

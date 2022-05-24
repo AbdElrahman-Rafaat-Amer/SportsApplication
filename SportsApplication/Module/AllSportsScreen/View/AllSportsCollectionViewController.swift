@@ -19,6 +19,8 @@ class AllSportsCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         title = "All Sports"
         refreshTableView()
+        
+        
     }
     
     
@@ -120,4 +122,5 @@ extension AllSportsCollectionViewController : ResultAPIProtocl{
     }
     
 }
+
 

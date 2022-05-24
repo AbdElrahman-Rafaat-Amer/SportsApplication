@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "D8B6C8ED-DE56-4E4A-AA5A-AFCE7882021E"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "20E6D251-97B3-4DE7-9258-AB612431E84A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SportsApplicationTests/NetworkServiceTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "NetworkServiceTests"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "20E6D251-97B3-4DE7-9258-AB612431E84A - f5b02b4e29499786"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SportsApplicationTests.NetworkServiceTests.__deallocating_deinit"
+                  moduleName = "SportsApplicationTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abdelrahmanamer/Documents/GitHub/SportsApplication/SportsApplicationTests/NetworkServiceTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "20E6D251-97B3-4DE7-9258-AB612431E84A - 967bff68eef60164"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SportsApplicationTests.NetworkServiceTests.__allocating_init(invocation: Swift.Optional&lt;__C.NSInvocation&gt;) -&gt; SportsApplicationTests.NetworkServiceTests"
+                  moduleName = "SportsApplicationTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abdelrahmanamer/Documents/GitHub/SportsApplication/SportsApplicationTests/NetworkServiceTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  uuid = "20E6D251-97B3-4DE7-9258-AB612431E84A - c866fb28b8283b7d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SportsApplicationTests.NetworkServiceTests.init(invocation: Swift.Optional&lt;__C.NSInvocation&gt;) -&gt; SportsApplicationTests.NetworkServiceTests"
+                  moduleName = "SportsApplicationTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abdelrahmanamer/Documents/GitHub/SportsApplication/SportsApplicationTests/NetworkServiceTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "119">
+               </Location>
+               <Location
+                  uuid = "20E6D251-97B3-4DE7-9258-AB612431E84A - ccaa10e7baffb325"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SportsApplicationTests.NetworkServiceTests.__allocating_init(selector: ObjectiveC.Selector) -&gt; SportsApplicationTests.NetworkServiceTests"
+                  moduleName = "SportsApplicationTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abdelrahmanamer/Documents/GitHub/SportsApplication/SportsApplicationTests/NetworkServiceTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  uuid = "20E6D251-97B3-4DE7-9258-AB612431E84A - c13d34e3fd27d95d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SportsApplicationTests.NetworkServiceTests.init(selector: ObjectiveC.Selector) -&gt; SportsApplicationTests.NetworkServiceTests"
+                  moduleName = "SportsApplicationTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abdelrahmanamer/Documents/GitHub/SportsApplication/SportsApplicationTests/NetworkServiceTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "119">
+               </Location>
+               <Location
+                  uuid = "20E6D251-97B3-4DE7-9258-AB612431E84A - da880c74f3d93bc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SportsApplicationTests.NetworkServiceTests.__allocating_init() -&gt; SportsApplicationTests.NetworkServiceTests"
+                  moduleName = "SportsApplicationTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abdelrahmanamer/Documents/GitHub/SportsApplication/SportsApplicationTests/NetworkServiceTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  uuid = "20E6D251-97B3-4DE7-9258-AB612431E84A - c772c6f4288fc25"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SportsApplicationTests.NetworkServiceTests.init() -&gt; SportsApplicationTests.NetworkServiceTests"
+                  moduleName = "SportsApplicationTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abdelrahmanamer/Documents/GitHub/SportsApplication/SportsApplicationTests/NetworkServiceTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "93">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

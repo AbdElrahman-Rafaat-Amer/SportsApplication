@@ -117,14 +117,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3046FC88282DC54F0055899D /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				C93FEC31282E67D0007484F8 /* connectivity */,
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
 		3061DA84283068BD00BA27AE /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,8 +339,8 @@
 		C93FEC30282E66B3007484F8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				C93FEC31282E67D0007484F8 /* connectivity */,
 				C9ED685C2831AF70008B182B /* CoreData */,
-				3046FC88282DC54F0055899D /* Network */,
 			);
 			path = Services;
 			sourceTree = "<group>";

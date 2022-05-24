@@ -22,10 +22,31 @@ class AllLeaguesViewPresenter {
         self.sportName = sportName
     }
     
+    /*  func getLeaguesFromAPI(){
+     NetworkService.loadDataFromAPi(parameterName : sportName, endPoint: EndPoints.allLeagues.rawValue){[weak self] (result: AllLeagues?) in
+     print("number of leagues ---> \(result?.countries.count ?? -1)")
+     if((result?.countries.isEmpty) == nil){
+     print("no leagues exist")
+     }else{
+     for i in 0...(result?.countries.count)!-1{
+     print(result?.countries[i].strLeague ?? "strLeague")
+     }
+     }
+     self?.leagues = result?.countries
+     DispatchQueue.main.async {
+     self?.viewController.renderTableView()
+     self?.viewController.stopAnimating()
+     }
+     }
+     }*/
+    
+    
     func getLeaguesFromAPI(){
-              
-        NetworkService.loadDataFromAPi(parameterName : sportName, endPoint: EndPoints.allLeagues.rawValue){[weak self] (result: AllLeagues?) in
+        NetworkService.getAllSports(parameterName : sportName,endPoint: EndPoints.allLeagues.rawValue){
+            [weak self] (result : AllLeagues? , error)   in
+          
             print("number of leagues ---> \(result?.countries.count ?? -1)")
+          
             if((result?.countries.isEmpty) == nil){
                 print("no leagues exist")
             }else{
@@ -38,6 +59,8 @@ class AllLeaguesViewPresenter {
                 self?.viewController.renderTableView()
                 self?.viewController.stopAnimating()
             }
+            
         }
     }
+    
 }

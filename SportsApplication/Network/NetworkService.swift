@@ -45,6 +45,7 @@ class NetworkService : MovieService{
             do{
                 
                 // result
+                
                 let result = try JSONDecoder().decode(T.self, from: data)
                 complitionHandler(result)
                 
@@ -55,6 +56,35 @@ class NetworkService : MovieService{
             }
         }
         task.resume()
+    }
+    
+    static func getAllSports <T : Decodable> (parameterName : String = "", endPoint : String ,completion : @escaping (T?, Error?)->Void) {
+        
+        print("parameterName \(parameterName)//")
+        let newParameterName = setUpParameters(parameters : parameterName)
+        print("parameterName \(newParameterName)//")
+        
+        let url = NetworkHelper.baseURL.rawValue +  endPoint + newParameterName
+        print("\(NetworkHelper.baseURL.rawValue)\(endPoint)\(newParameterName)")
+        
+    //    let path = NetworkHelper.baseURL.rawValue + EndPoints.allSports.rawValue
+        
+        print("path \(url)")
+        AF.request(url).validate().responseDecodable(of: T.self) { (response) in
+            switch response.result {
+            case .success( _):
+                print("sucess")
+                guard let AllSportData = response.value
+                    else {return}
+                
+                completion(AllSportData,nil)
+                
+            case .failure(let error):
+                print("fail")
+                print(error)
+                completion(nil , error)
+            }
+        }
     }
 }
 
